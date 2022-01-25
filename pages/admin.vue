@@ -1,0 +1,62 @@
+<template>
+     <form @submit.prevent="handleAdmin" class="admin">
+        <div class="title-form">
+            <h1>Admin</h1>
+        </div>
+        <div>
+            <label for="admin-code">Admin Code</label>
+            <input v-model.trim="adminCode" @click="removeError" id="admin-code" type="text" autocomplete="off" required>
+        </div>
+        <small v-if="error" class="error small">{{ error }}</small>
+        <button>Submit</button>
+    </form>
+</template>
+
+<script>
+export default {
+    middleware: 'isLogin',
+    layout: 'center',
+    head() {
+        return {
+            title: 'Admin | Wibro'
+        }
+    },
+    data() {
+        return {
+            adminCode: '',
+            error: null,
+        }
+    },
+    methods: {
+        async handleAdmin() {
+            const res = await this.$fire.firestore.collection("admin").doc(this.adminCode)
+            const resResults = await res.get()
+            if(resResults.data()) {
+                if(!resResults.data().user) {
+                    const user = await this.$fire.firestore.collection("users").doc(this.$store.state.profileId)
+                    await user.update({
+                        admin: true
+                    })
+
+                    await res.update({
+                        user: this.$store.state.profileUsername
+                    })
+
+                    await this.$store.commit('updateAdminStatus')
+                    this.$router.push('/')
+                    return
+                }
+
+                this.error = "You don't have permission for this code!!"
+                return
+            }
+
+            this.error = 'Your code is invalid!!'
+            return
+        },
+        removeError() {
+            this.error = null
+        }
+    }
+}
+</script>
