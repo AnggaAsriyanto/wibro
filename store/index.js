@@ -45,7 +45,7 @@ export const mutations = {
         state.profilePhoto = doc.data().photo;
         state.profilePhotoName = doc.data().photoName;
         state.profileUsername = doc.data().username;
-        console.log('Get User', state.profileUsername)
+        console.log('🖐 Hi', state.profileUsername)
     },
     clearProfileInfo(state) {
         state.user = null;
@@ -102,7 +102,7 @@ export const mutations = {
         console.log(payload)
     },
     addPost(state, payload) {
-        state.posts.unshift(payload)
+        state.posts.push(payload)
     },
     filterPost(state, payload) {
         state.posts = state.posts.filter((post) => post.postId !== payload)
@@ -145,7 +145,6 @@ export const mutations = {
     },
     notAnonymous(state) {
         state.isAnonymous = false
-        console.log(state.isAnonymous)
     },
     toggleBar(state) {
         state.isBar = !state.isBar
@@ -169,7 +168,7 @@ export const actions = {
     },
     async getPosts({ state, commit }) {
         commit("load");
-        const database = await this.$fire.firestore.collection("posts").orderBy("date", "asc")
+        const database = await this.$fire.firestore.collection("posts").orderBy("date", "desc")
         const dbResults = await database.get()
         dbResults.forEach((doc) => {
             if(!state.posts.some((post) => post.postId === doc.id)) {
@@ -190,7 +189,7 @@ export const actions = {
             }
         });
         commit("unload")
-        console.log("Get Post")
+        console.log("✅ Get Data")
     },
     async updatePost({commit, dispatch}, payload) {
         commit("filterPost", payload)
@@ -204,7 +203,7 @@ export const actions = {
     async isAnonymous({commit}) {
         await this.$fire.auth.signInAnonymously()
         .then(() => {
-            console.log('SignIn Anonymously Run')
+            console.log('🍕 Run No User')
             commit('thisAnonymous')
             return;
         })
@@ -215,17 +214,16 @@ export const actions = {
     async onAuthStateChangedAction({ state, commit, dispatch }, { authUser }) {
         console.log('state-changed')
         if(!authUser) {
-            await commit('clearProfileInfo')
+            commit('clearProfileInfo')
             return 
         } 
 
         if(!authUser.email) {
-            console.log('SignIn with Anonymous')
+            console.log('🌍 No User')
             commit('thisAnonymous')
             return
         }
-
-        console.log('executed')
+        
         commit('notAnonymous')
         await dispatch('getCurrentUser', authUser)
     },
@@ -233,10 +231,9 @@ export const actions = {
         if (res && res.locals && res.locals.user) {
           const { allClaims: claims, idToken: token, ...authUser } = res.locals.user
 
-          await dispatch("onAuthStateChangedAction", { authUser })
-          
+          await dispatch("onAuthStateChangedAction", { authUser })      
         } else {
             await dispatch("isAnonymous")
-        }
+        } 
     }
 }

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Poppins:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;700&family=Poppins:wght@400;700;800&display=swap');
 
 * {
     margin: 0;
@@ -108,7 +108,7 @@ form {
 	justify-content: center;
 	align-items: center;
 	background-color: rgb(255, 255, 255);
-	box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.1);
+	border: 2px solid #e7e7e7;
     @media (min-width: 550px) {
         min-width: 30%;
         max-width: max-content;
@@ -188,6 +188,7 @@ form.admin {
 	}
 	.title {
 		h1 {
+			font-size: 2rem;
 			line-height: 2.85rem;
 			@media (min-width: 550px) {
 				font-size: 2.6rem;
@@ -212,6 +213,7 @@ form.admin {
 		justify-content: space-between;
 		color: rgba(0, 0, 0, 0.6);
 		font-family: "Poppins", sans-serif;
+		margin-bottom: 1.5rem;
 	}
 	.img-container {
 		min-width: 100%;
@@ -225,14 +227,20 @@ form.admin {
 			object-fit: cover;
 		}
 	}
+	.intro {
+		text-align: center;
+		font-size: 0.8rem;
+		font-weight: 500;
+		margin-top: -.8rem;
+		color: #858585;
+	}
 	.content-html {
-		font-family: "Montserrat", sans-serif;
+		font-family: "Open Sans", sans-serif;
 		>p {
-			font-size: 0.9rem;
+			font-size: .93rem;
 			font-weight: 500;
 			line-height: 1.68rem;
 			margin-bottom: -0.4rem;
-			letter-spacing: -.3px;
 			word-spacing: 1.3px;
 		}
 		p, span {
@@ -245,6 +253,7 @@ form.admin {
 
 		h2 {
 			margin-bottom: 0.5rem;
+			word-spacing: 1px;
 		}
 	}
 	.adv {
@@ -274,6 +283,7 @@ form.admin {
 			left: 0;
 			transform: translateX(0);
 			transition: 1s ease;
+			padding: 0;
 		}
 		small {
 			@media (min-width: 550px) {
@@ -328,9 +338,9 @@ form.admin {
 					background-color: rgb(46, 46, 221);
 				}
 			}
-			.st-custom-button.share-network-messenger {
+			.st-custom-button.share-network-telegram {
 				@media (min-width: 550px) {
-					background-color: rgb(122, 43, 226);
+					background-color: rgb(71, 194, 252);
 				}
 			}
 			span {
@@ -407,18 +417,10 @@ form.admin {
 	}
 }
 
-@media (min-width: 550px) {
-	.post-article {
-		>div {
-			padding: 0;
-		}
-	}
-}
-
 .quillWrapper {
     height: 100%;
     .ql-container {
-        font-family: "Montserrat", sans-serif;
+        font-family: "Open Sans", sans-serif;
     }
 	.ql-editor {
 		font-weight: 500;

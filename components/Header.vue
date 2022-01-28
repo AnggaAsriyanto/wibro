@@ -1,78 +1,81 @@
 <template>
-    <fragment>
-        <nav>
-            <div class="nav-menu">
-                <div class="menu-bar">
-                    <button @click="toggleBar" type="button" class="toggle-bar">
-                        <i class="fas fa-bars"></i>
-                    </button>
-                </div>
-                <div class="brand">
-                    <nuxt-link to="/">
-                        <img src="../static/wibro.svg" alt="wibro_logo">
-                    </nuxt-link>
-                </div>
-                <div class="user-cont">
-                    <div @click="showUser" class="user">
-                        <img v-if="$store.state.profilePhoto" :src="$store.state.profilePhoto" :alt="$store.state.profilePhotoName">
+	<header>
+		<nav>
+			<div class="nav-menu">
+				<div class="menu-bar">
+					<button @click="toggleBar" type="button" class="toggle-bar">
+						<i class="fas fa-bars"></i>
+					</button>
+				</div>
+				<div class="brand">
+					<nuxt-link to="/">
+						<img src="../static/wibro.svg" alt="wibro logo">
+					</nuxt-link>
+				</div>
+				<div class="user-cont">
+					<div @click="showUser" class="user">
+						<img v-if="$store.state.profilePhoto" :src="$store.state.profilePhoto" :alt="$store.state.profilePhotoName">
 						<img v-else src="../static/user.svg" alt="user">
-                    </div>
-                    <div v-if="$store.state.isInfoUser" class="info-user">
-                        <div v-if="!$store.state.user" class="option">
-                            <div>
-                                <nuxt-link :to="{ name: 'users-login' }">Login</nuxt-link>
-                            </div>
-                            <hr>
-                            <div>
-                                <nuxt-link :to="{ name: 'users-register' }">Daftar</nuxt-link>
-                            </div>
-                        </div>
+					</div>
+					<div v-if="$store.state.isInfoUser" class="info-user">
+						<div v-if="!$store.state.user" class="option">
+							<div>
+								<nuxt-link @click.native="showUser" :to="{ name: 'users-login' }">Login</nuxt-link>
+							</div>
+							<hr>
+							<div>
+								<nuxt-link @click.native="showUser" :to="{ name: 'users-register' }">Daftar</nuxt-link>
+							</div>
+						</div>
 						<div v-if="$store.state.user" class="option">
 							<div v-if="username">
 								<p>{{ username }}</p>
 							</div>
-                            <div>
-                                <nuxt-link @click.native="showUser" :to="{ name: 'users-edit-profile' }">Edit Profile</nuxt-link>
-                            </div>
-                            <hr>
-                            <div v-if="$store.state.isAdmin">
-                                <nuxt-link @click.native="showUser" :to="{ name: 'create-post' }">Create Post</nuxt-link>
-                            </div>
-							<hr>
+							<hr v-if="username">
 							<div>
-                                <button @click="logOut" class="logout">Logout</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </nav>
-
-        <div :class="{ 'bar': true, 'show': $store.state.isBar }">
-            <div class="bar-menu">
-				<div class="brand-cont">
-					<div class="img-cont">
-						<img src="../static/wibro.svg" alt="wibro">
+								<nuxt-link @click.native="showUser" :to="{ name: 'users-edit-profile' }">Edit Profile</nuxt-link>
+							</div>
+							<hr>
+							<div v-if="$store.state.isAdmin">
+								<nuxt-link @click.native="showUser" :to="{ name: 'create-post' }">Create Post</nuxt-link>
+							</div>
+							<hr v-if="$store.state.isAdmin">
+							<div>
+								<button @click="logOut" class="logout">Logout</button>
+							</div>
+						</div>
 					</div>
-					<button @click="toggleBar" class="toggle-bar">
-						<span><i class="fas fa-times"></i></span>
-					</button>
 				</div>
-                <div>
-                    <nuxt-link @click.native="toggleBar" to="/">Home</nuxt-link>
-                </div>
-                <div>
-                    <nuxt-link @click.native="toggleBar" to="/">About</nuxt-link>
-                </div>
-                <div>
-                    <nuxt-link @click.native="toggleBar" to="/">Contact</nuxt-link>
-                </div>
-				<div v-if="$store.state.user">
-                    <nuxt-link @click.native="toggleBar" :to="{ name: 'admin' }">Admin</nuxt-link>
-                </div>
-            </div>
-        </div>
-    </fragment>
+			</div>
+		</nav>
+
+		<div :class="{ 'bar': true, 'show': $store.state.isBar }">
+			<client-only>
+				<div class="bar-menu">
+					<div class="brand-cont">
+						<div class="img-cont">
+							<img src="../static/wibro.svg" alt="wibro">
+						</div>
+						<button @click="toggleBar" class="toggle-bar">
+							<span><i class="fas fa-times"></i></span>
+						</button>
+					</div>
+					<div>
+						<nuxt-link @click.native="toggleBar" to="/">Home</nuxt-link>
+					</div>
+					<div>
+						<nuxt-link @click.native="toggleBar" :to="{ name: 'about' }">About</nuxt-link>
+					</div>
+					<div>
+						<nuxt-link @click.native="toggleBar" :to="{ name: 'contact' }">Contact</nuxt-link>
+					</div>
+					<div v-if="$store.state.user">
+						<nuxt-link @click.native="toggleBar" :to="{ name: 'admin' }">Admin</nuxt-link>
+					</div>
+				</div>
+			</client-only>
+		</div>
+	</header>
 </template>
 
 <script>
@@ -101,6 +104,7 @@ export default {
 			await this.$fire.auth.signOut()
 			await this.$store.dispatch('isAnonymous')
 			await this.$nuxt.refresh()
+			this.$store.commit("toggleInfoUser")
 		}
     }
 }
@@ -197,6 +201,7 @@ nav {
 			border: none;
 			font-size: inherit;
 			color: red;
+			cursor: pointer;
 		}
 	}
 	hr {
@@ -222,6 +227,9 @@ nav {
 		text-decoration: none;
 		color: rgb(43, 43, 43);
 		font-weight: 700;
+		&:active {
+			opacity: 0;
+		}
 	}
 	.bar-menu {
 		>div {

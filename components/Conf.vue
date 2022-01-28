@@ -36,7 +36,8 @@ export default {
     height: max-content;
     background-color: #fff;
     border-radius: 15px;
-    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.1);
+    border: 2px solid #ff4c4c;
+    z-index: 10000;
     .conf-content {
         padding: 0.6rem 1rem;
         >div {

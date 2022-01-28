@@ -1,11 +1,11 @@
 <template>
   <div class="app">
-    <div class="main">
+    <main class="main">
       <Loading v-if="$store.state.postsLoad" />
       <div :class="{ content: true, post: isPost, focus: isFocus }">
         <Nuxt />
       </div>
-    </div>
+    </main>
   </div>
 </template>
 

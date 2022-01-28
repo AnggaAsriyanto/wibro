@@ -1,19 +1,23 @@
 <template>
     <fragment>
-        <div class="post-article" v-if="currentPost.length === 1">
+        <client-only>
+        <article class="post-article" v-if="currentPost.length === 1">
             <Conf v-if="isConf" :cancle="cancle" :deletePost="deletePost" :postTitle="currentPost[0].postTitle" />
             <div class="category">
-                <nuxt-link :class="currentPost[0].postCategory" to="#">{{ currentPost[0].postCategory }}</nuxt-link>
+                <nuxt-link :class="category" to="#">{{ category }}</nuxt-link>
             </div>
             <div class="title">
-                <h1>{{ currentPost[0].postTitle }}</h1>
+                <h1>{{ title }}</h1>
             </div>
             <div class="info">
-                <small>Published by {{ currentPost[0].postAuthor }}</small>
+                <small>Published by {{ author }}</small>
                 <small>{{ new Date(currentPost[0].postDate).toLocaleString("id", { dateStyle: "long"}) }}</small>
             </div>
             <div class="img-container">
-                <img :src="currentPost[0].postCoverImage" alt="">
+                <img :src="image" :alt="currentPost[0].postCoverImageName">
+            </div>
+            <div class="intro">
+                <small>{{ title }}</small>
             </div>
             <div class="content-html" v-html="currentPost[0].postHTML">
             </div>
@@ -34,35 +38,18 @@
                     <ShareNetwork network="whatsapp" :url="url" :title="title" class="st-custom-button"><span><i class="fab fa-whatsapp"></i></span></ShareNetwork>
                     <ShareNetwork network="twitter" :url="url" :title="title" class="st-custom-button"><span><i class="fab fa-twitter"></i></span></ShareNetwork>
                     <ShareNetwork network="facebook" :url="url" :title="title" :description="description" :hashtags="currentPost[0].postTags" class="st-custom-button" ><span><i class="fab fa-facebook-f"></i></span></ShareNetwork>
-                    <ShareNetwork network="messenger" :url="url" :title="title" class="st-custom-button"><span><i class="fab fa-facebook-messenger"></i></span></ShareNetwork>
+                    <ShareNetwork network="telegram" :url="url" :title="title" class="st-custom-button"><span><i class="fab fa-telegram"></i></span></ShareNetwork>
                 </div>
             </div>
-            <!-- <div class="other-posts">
-                <h3>Article lainnya</h3>
-                <div class="content">
-                    <div class="other-post">
-                        <div class="img-cont">
-                            <img v-if="otherPost.postCoverImage" :src="otherPost.postCoverImage" :alt="otherPost.postCoverImageName">
-                        </div>
-                        <div class="info-op">
-                            <div class="title">
-                                <h4>{{ otherPost.postTitle }}</h4>
-                            </div>
-                            <div class="detail">
-                                <small><span><i class="fas fa-book-open"></i></span>{{ otherPost.postTimeRead }} menit</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
             <div v-if="$store.state.isAdmin" class="admin-opt">
                 <div class="admin-btn">
                     <nuxt-link :to="{ name: 'edit-post-id-title', params: { id: currentPost[0].postId, title: currentPost[0].postTitle.replace(/\s+/g, '-').toLowerCase() }}" class="post-tools edit"><span><i class="fas fa-pen"></i></span> Edit Post</nuxt-link>
                     <button @click="deleteConf" class="post-tools delete"><span><i class="far fa-trash-alt"></i></span> Delete Post</button>
                 </div>
             </div>
-        </div>
+        </article>
         <Loading v-else />
+        </client-only>
     </fragment>
 </template>
 
@@ -91,6 +78,8 @@ export default {
             url: null,
             title: '',
             image: null,
+            author: '',
+            category: '',
             show: null,
             footerNum: null,
         }
@@ -103,7 +92,9 @@ export default {
         this.description = this.currentPost[0].postMetaDesc
         this.url = `http://localhost:300${this.$route.path}`
         this.title = this.currentPost[0].postTitle
-        this.image = this.currentPost[0].postCoverImage   
+        this.image = this.currentPost[0].postCoverImage
+        this.category = this.currentPost[0].postCategory
+        this.author = this.currentPost[0].postAuthor
     },
     mounted() {
         window.addEventListener('scroll', this.handleScroll )

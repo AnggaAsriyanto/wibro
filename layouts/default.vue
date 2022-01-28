@@ -1,12 +1,12 @@
 <template>
   <div class="app">
-    <Navbar />
-    <div class="main" @click="reset">
+    <Header />
+    <main class="main" @click="reset">
       <div :class="{ content: true, article: isArticle }">
         <Nuxt />
       </div>
       <Sidebar />
-    </div>
+    </main>
     <Footer />
   </div>
 </template>

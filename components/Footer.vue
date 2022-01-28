@@ -1,20 +1,22 @@
 <template>
     <footer ref="footer">
         <div class="brand">
-            <div class="img-cont">
+            <figure class="img-cont">
 				<img src="../static/wibro-bb.svg" alt="wibro"> <h1>ibro</h1>
-			</div>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. At, veniam?, © Copyright 2021</p>
+			</figure>
+            <p>Berita dan Info Anime Terupdate, © Copyright 2022</p>
         </div>
 
         <div class="link">
             <div class="quick-link">
-                <ul>
-                    <li><nuxt-link to="/">Home</nuxt-link></li>
-                    <li><nuxt-link to="/">About</nuxt-link></li>
-                    <li><nuxt-link to="/">Contact</nuxt-link></li>
-                    <li v-if="$store.state.user"><nuxt-link :to="{ name: 'admin' }">Admin</nuxt-link></li>
-                </ul>
+				<client-only>
+					<ul>
+						<li><nuxt-link to="/">Home</nuxt-link></li>
+						<li><nuxt-link :to="{ name: 'about' }">About</nuxt-link></li>
+						<li><nuxt-link :to="{ name: 'contact' }">Contact</nuxt-link></li>
+						<li v-if="$store.state.user"><nuxt-link :to="{ name: 'admin' }">Admin</nuxt-link></li>
+					</ul>
+				</client-only>
             </div>
         
             <div class="social-media">
@@ -108,6 +110,9 @@ footer {
 			border-radius: 10px;
 			text-decoration: none;
 			color: #fff;
+			&:active {
+				opacity: 0;
+			}
 		}
 	}
 	.social-media {

@@ -1,5 +1,5 @@
 <template>
-  <div class="post-card">
+  <section class="post-card">
       <div class="img-post">
           <div class="img-container">
               <img v-if="post.postCoverImage" :src="post.postCoverImage" :alt="post.postCoverImageName">
@@ -18,7 +18,7 @@
               </div>
           </article>
       </div>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -42,9 +42,13 @@ export default {
     @media (max-width: 350px) {
 	    height: 60vh;
 	}
+	@media (min-width: 550px) {
+		max-height: 350px;
+	}
 	.img-post {
 		position: relative;
 		width: 100%;
+		flex: auto;
 		height: 60%;
 	}
 	.img-container {
@@ -53,7 +57,10 @@ export default {
 		background-color: beige;
 	}
 	.category {
-		margin-bottom: 0.5rem;
+		margin-bottom: .7rem;
+		@media (min-width: 550px) {
+			margin-bottom: .5rem;
+		}
 	}
 	h1 {
 		font-size: 1.2rem;
@@ -88,6 +95,10 @@ export default {
 		display: flex;
 		justify-content: space-between;
 		margin-top: 0.8rem;
+		margin-bottom: .5rem;
+		@media (min-width: 550px) {
+			margin-bottom: 0;
+		}
 		small {
 			color: rgba(0, 0, 0, 0.55);
             @media (min-width: 550px) {

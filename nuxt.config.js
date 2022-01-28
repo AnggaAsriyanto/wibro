@@ -11,6 +11,7 @@ export default {
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: 'Berita dan Info terbaru Anime di Indonesia' },
       { name: 'format-detection', content: 'telephone=no' },
+      { name: 'author', content: 'Angga Asriyanto'}
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/wibro.svg' },
@@ -40,7 +41,7 @@ export default {
   buildModules: [],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ["vue2-editor/nuxt", "vue-social-sharing/nuxt", [
+  modules: ["vue2-editor/nuxt", "vue-social-sharing/nuxt", "@nuxtjs/robots", [
     '@nuxtjs/firebase',
     {
       config: {
@@ -84,6 +85,11 @@ export default {
       }
     ]
   ],
+
+  robots: {
+    UserAgent: '*',
+    Disallow: '/admin',
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},

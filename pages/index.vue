@@ -2,7 +2,6 @@
   <fragment>
     <div v-if="!loading" class="post-card-list">
         <nuxt-link
-        rel=canonical
         v-for="(post, idx) in postsFeeds" 
         :key="idx"
         :to="{ name: 'posts-id-title', params: { title: post.postTitle.replace(/\s+/g, '-').toLowerCase(), id: post.postId } }">
@@ -13,7 +12,7 @@
     </div>
     <div v-if="postsFeeds.length == 9 && !loading" class="more-posts">
        <nuxt-link :to="{ name: 'posts-pages-idx', params: { idx: 1} }">
-          <h6>Lihat lebih banyak <span><i class="fas fa-arrow-right"></i></span></h6>
+          <h5>Lihat lebih banyak <span><i class="fas fa-arrow-right"></i></span></h5>
        </nuxt-link>
     </div>
     <CompLoad v-else />
@@ -58,7 +57,7 @@ export default {
   a {
     text-decoration: none;
   }
-  h6 {
+  h5 {
     color: #fff;
   }
   span {
