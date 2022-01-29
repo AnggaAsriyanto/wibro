@@ -22,6 +22,7 @@ export const state = () => ({
     profileId: null,
     isBar: null,
     isInfoUser: null,
+    firstReload: null,
 })
 
 export const getters = {
@@ -141,7 +142,6 @@ export const mutations = {
     },
     thisAnonymous(state) {
         state.isAnonymous = true
-        console.log(state.isAnonymous)
     },
     notAnonymous(state) {
         state.isAnonymous = false
@@ -155,6 +155,9 @@ export const mutations = {
     resetBarInfoUser(state) {
         state.isBar = false
         state.isInfoUser = false
+    },
+    changeFirstReload(state) {
+        state.firstReload = true
     }
 }
 
@@ -211,7 +214,7 @@ export const actions = {
             console.log(err)
         })
     },
-    async onAuthStateChangedAction({ state, commit, dispatch }, { authUser }) {
+    async onAuthStateChangedAction({ state, commit, dispatch }, { authUser } ) {
         console.log('state-changed')
         if(!authUser) {
             commit('clearProfileInfo')
@@ -227,12 +230,13 @@ export const actions = {
         commit('notAnonymous')
         await dispatch('getCurrentUser', authUser)
     },
-    async nuxtServerInit({ dispatch, commit }, { res }) {
-        if (res && res.locals && res.locals.user) {
+    async nuxtServerInit({ state, dispatch, commit }, { res }) {
+        if (res && res.locals && res.locals.user && state.firstReload ) {
           const { allClaims: claims, idToken: token, ...authUser } = res.locals.user
 
           await dispatch("onAuthStateChangedAction", { authUser })      
         } else {
+            await commit("changeFirstReload")            
             await dispatch("isAnonymous")
         } 
     }

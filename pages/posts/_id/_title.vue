@@ -1,56 +1,49 @@
 <template>
-    <fragment>
-        <client-only>
-        <article class="post-article" v-if="currentPost.length === 1">
-            <Conf v-if="isConf" :cancle="cancle" :deletePost="deletePost" :postTitle="currentPost[0].postTitle" />
-            <div class="category">
-                <nuxt-link :class="category" to="#">{{ category }}</nuxt-link>
+    <article v-if="!loading" class="post-article">
+        <Conf v-show="isConf" :cancle="cancle" :deletePost="deletePost" :postTitle="currentPost[0].postTitle" />
+        <div class="category">
+            <nuxt-link :class="category" to="#">{{ currentPost[0].postCategory }}</nuxt-link>
+        </div>
+        <div class="title">
+            <h1>{{ currentPost[0].postTitle }}</h1>
+        </div>
+        <div class="info">
+            <small>Published by {{ author }}</small>
+            <small>{{ new Date(currentPost[0].postDate).toLocaleString("id", { dateStyle: "long"}) }}</small>
+        </div>
+        <div class="img-container">
+            <img :src="currentPost[0].postCoverImage" :alt="currentPost[0].postCoverImageName">
+        </div>
+        <div class="intro">
+            <small>{{ currentPost[0].postTitle }}</small>
+        </div>
+        <div class="content-html" v-html="currentPost[0].postHTML">
+        </div>
+        <div class="tag-cont" ref="tag">
+            <div>
+                <small>Tags :</small>
             </div>
-            <div class="title">
-                <h1>{{ title }}</h1>
+            <div class="tag-list">
+                <span v-for="(postTag, idx) in postTags" :key="idx">#{{ postTag.trim() }}</span>
             </div>
-            <div class="info">
-                <small>Published by {{ author }}</small>
-                <small>{{ new Date(currentPost[0].postDate).toLocaleString("id", { dateStyle: "long"}) }}</small>
+        </div>
+        <div :class="{ share: true, show: show}">
+            <small>Bagikan ke:</small>
+            <div class="social-media">
+                <ShareNetwork network="whatsapp" :url="url" :title="title" aria-label="whatsapp" class="st-custom-button"><span><i class="fab fa-whatsapp"></i></span></ShareNetwork>
+                <ShareNetwork network="twitter" :url="url" :title="title" aria-label="twitter" class="st-custom-button"><span><i class="fab fa-twitter"></i></span></ShareNetwork>
+                <ShareNetwork network="facebook" :url="url" :title="title" aria-label="facebook" :description="description" :hashtags="currentPost[0].postTags" class="st-custom-button" ><span><i class="fab fa-facebook-f"></i></span></ShareNetwork>
+                <ShareNetwork network="telegram" :url="url" :title="title" aria-label="telegram" class="st-custom-button"><span><i class="fab fa-telegram"></i></span></ShareNetwork>
             </div>
-            <div class="img-container">
-                <img :src="image" :alt="currentPost[0].postCoverImageName">
+        </div>
+        <div v-if="$store.state.isAdmin" class="admin-opt">
+            <div class="admin-btn">
+                <nuxt-link :to="{ name: 'edit-post-id-title', params: { id: currentPost[0].postId, title: currentPost[0].postTitle.replace(/\s+/g, '-').toLowerCase() }}" class="post-tools edit"><span><i class="fas fa-pen"></i></span> Edit Post</nuxt-link>
+                <button @click="deleteConf" class="post-tools delete"><span><i class="far fa-trash-alt"></i></span> Delete Post</button>
             </div>
-            <div class="intro">
-                <small>{{ title }}</small>
-            </div>
-            <div class="content-html" v-html="currentPost[0].postHTML">
-            </div>
-            <!-- <div class="adv">
-
-            </div> -->
-            <div class="tag-cont" ref="tag">
-                <div>
-                    <small>Tags :</small>
-                </div>
-                <div class="tag-list">
-                    <span v-for="(postTag, idx) in postTags" :key="idx">#{{ postTag.trim() }}</span>
-                </div>
-            </div>
-            <div :class="{ share: true, show: show}">
-                <small>Bagikan ke:</small>
-                <div class="social-media">
-                    <ShareNetwork network="whatsapp" :url="url" :title="title" class="st-custom-button"><span><i class="fab fa-whatsapp"></i></span></ShareNetwork>
-                    <ShareNetwork network="twitter" :url="url" :title="title" class="st-custom-button"><span><i class="fab fa-twitter"></i></span></ShareNetwork>
-                    <ShareNetwork network="facebook" :url="url" :title="title" :description="description" :hashtags="currentPost[0].postTags" class="st-custom-button" ><span><i class="fab fa-facebook-f"></i></span></ShareNetwork>
-                    <ShareNetwork network="telegram" :url="url" :title="title" class="st-custom-button"><span><i class="fab fa-telegram"></i></span></ShareNetwork>
-                </div>
-            </div>
-            <div v-if="$store.state.isAdmin" class="admin-opt">
-                <div class="admin-btn">
-                    <nuxt-link :to="{ name: 'edit-post-id-title', params: { id: currentPost[0].postId, title: currentPost[0].postTitle.replace(/\s+/g, '-').toLowerCase() }}" class="post-tools edit"><span><i class="fas fa-pen"></i></span> Edit Post</nuxt-link>
-                    <button @click="deleteConf" class="post-tools delete"><span><i class="far fa-trash-alt"></i></span> Delete Post</button>
-                </div>
-            </div>
-        </article>
-        <Loading v-else />
-        </client-only>
-    </fragment>
+        </div>
+    </article>
+    <CompLoad v-else />
 </template>
 
 <script>
@@ -73,7 +66,6 @@ export default {
         return {
             currentPost: null,
             isConf: null,
-            isShareThisLoaded: null,
             description: '',
             url: null,
             title: '',
@@ -82,6 +74,7 @@ export default {
             category: '',
             show: null,
             footerNum: null,
+            loading: true,
         }
     },
     created() {
@@ -97,6 +90,7 @@ export default {
         this.author = this.currentPost[0].postAuthor
     },
     mounted() {
+        this.loading = null
         window.addEventListener('scroll', this.handleScroll )
     },
     beforeDestroy() {

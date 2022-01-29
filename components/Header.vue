@@ -3,7 +3,7 @@
 		<nav>
 			<div class="nav-menu">
 				<div class="menu-bar">
-					<button @click="toggleBar" type="button" class="toggle-bar">
+					<button @click="toggleBar" aria-label="toggle-bar" type="button" class="toggle-bar">
 						<i class="fas fa-bars"></i>
 					</button>
 				</div>
@@ -153,7 +153,7 @@ nav {
 		img {
 			width: 100%;
 			height: 100%;
-			object-fit: cover;
+			object-fit: contain;
 		}
 	}
 	.user-cont {

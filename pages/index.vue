@@ -5,9 +5,7 @@
         v-for="(post, idx) in postsFeeds" 
         :key="idx"
         :to="{ name: 'posts-id-title', params: { title: post.postTitle.replace(/\s+/g, '-').toLowerCase(), id: post.postId } }">
-          <client-only>
-            <PostCard v-if="post" :post="post" />
-          </client-only>
+            <PostCard :post="post" />
         </nuxt-link>
     </div>
     <div v-if="postsFeeds.length == 9 && !loading" class="more-posts">
