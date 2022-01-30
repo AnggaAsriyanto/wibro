@@ -83,7 +83,7 @@ export default {
         })
 
         this.description = this.currentPost[0].postMetaDesc
-        this.url = `http://localhost:300${this.$route.path}`
+        this.url = `http://wibro.herokuapp.com${this.$route.path}`
         this.title = this.currentPost[0].postTitle
         this.image = this.currentPost[0].postCoverImage
         this.category = this.currentPost[0].postCategory
