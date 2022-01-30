@@ -13,7 +13,7 @@
           <h5>Lihat lebih banyak <span><i class="fas fa-arrow-right"></i></span></h5>
        </nuxt-link>
     </div>
-    <!-- <CompLoad v-else /> -->
+    <CompLoad v-else />
   </fragment>
 </template>
 
