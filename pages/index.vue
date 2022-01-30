@@ -8,12 +8,12 @@
             <PostCard :post="post" />
         </nuxt-link>
     </div>
-    <div v-if="postsFeeds.length == 9 && !loading" class="more-posts">
+    <CompLoad v-else />
+    <div v-show="postsFeeds.length == 9 && !loading" class="more-posts">
        <nuxt-link :to="{ name: 'posts-pages-idx', params: { idx: 1} }">
           <h5>Lihat lebih banyak <span><i class="fas fa-arrow-right"></i></span></h5>
        </nuxt-link>
     </div>
-    <CompLoad v-else />
   </fragment>
 </template>
 

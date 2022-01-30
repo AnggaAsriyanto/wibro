@@ -100,6 +100,7 @@ export default {
         async deletePost() {
             this.$store.dispatch("deletePost", this.currentPost[0].postId)
             await this.$router.push('/')
+            this.$nuxt.refresh()
         },
         deleteConf() {
             this.isConf = true
