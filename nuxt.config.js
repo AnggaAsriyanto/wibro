@@ -38,10 +38,12 @@ export default {
   components: true,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: [],
+  buildModules: [
+    '@/modules/generate'
+  ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ["vue2-editor/nuxt", "vue-social-sharing/nuxt", "@nuxtjs/robots", [
+  modules: ["vue2-editor/nuxt", "vue-social-sharing/nuxt", "@nuxtjs/robots",  "@nuxtjs/sitemap", [
     '@nuxtjs/firebase',
     {
       config: {
@@ -89,6 +91,12 @@ export default {
   robots: {
     UserAgent: '*',
     Disallow: '/admin',
+  },
+
+  sitemap: {
+    hostname: 'https://www.wibro.herokuapp.com/',
+    gzip: true,
+    exclude: ['/admin'],
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
