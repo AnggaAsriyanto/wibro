@@ -43,7 +43,7 @@
             </div>
         </div>
     </article>
-    <CompLoad v-else />
+    <!-- <CompLoad v-else /> -->
 </template>
 
 <script>
