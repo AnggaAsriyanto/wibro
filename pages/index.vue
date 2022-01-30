@@ -36,6 +36,9 @@ export default {
   mounted() {
     this.loading = false
   },
+  destroyed() {
+    this.loading = true
+  },
   computed: {
     postsFeeds() {
       return this.$store.getters.postsFeeds
