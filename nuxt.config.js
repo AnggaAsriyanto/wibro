@@ -38,9 +38,7 @@ export default {
   components: true,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: [
-    '@/modules/generate'
-  ],
+  buildModules: [],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: ["vue2-editor/nuxt", "vue-social-sharing/nuxt", "@nuxtjs/robots",  "@nuxtjs/sitemap", [
@@ -94,9 +92,12 @@ export default {
   },
 
   sitemap: {
-    hostname: 'https://www.wibro.herokuapp.com/',
+    hostname: 'https://wibro.herokuapp.com/',
     gzip: true,
     exclude: ['/admin'],
+    routes: [
+      'posts/DQGsQDE8orJKZYHZUS1C/bocoran-manga-attack-on-titans-terbaru!',
+    ]
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
