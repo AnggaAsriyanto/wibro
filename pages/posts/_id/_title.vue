@@ -1,23 +1,23 @@
 <template>
-    <article v-if="!loading" class="post-article">
-        <Conf v-show="isConf" :cancle="cancle" :deletePost="deletePost" :postTitle="currentPost[0].postTitle" />
+    <article v-if="!loading" class="post-article" lang="id">
+        <Conf v-show="isConf" :cancle="cancle" :deletePost="deletePost" :postTitle="post[0].postTitle" />
         <div class="category">
-            <nuxt-link :class="category" to="#">{{ currentPost[0].postCategory }}</nuxt-link>
+            <nuxt-link :class="post[0].postCategory" aria-label="category" to="#">{{ post[0].postCategory }}</nuxt-link>
         </div>
         <div class="title">
-            <h1>{{ currentPost[0].postTitle }}</h1>
+            <h1>{{ post[0].postTitle }}</h1>
         </div>
         <div class="info">
-            <small>Published by {{ author }}</small>
-            <small>{{ new Date(currentPost[0].postDate).toLocaleString("id", { dateStyle: "long"}) }}</small>
+            <small>Published by {{ post[0].postAuthor }}</small>
+            <small>{{ new Date(post[0].postDate).toLocaleString("id", { dateStyle: "long"}) }}</small>
         </div>
         <div class="img-container">
-            <img :src="currentPost[0].postCoverImage" :alt="currentPost[0].postCoverImageName">
+            <img :src="post[0].postCoverImage" :alt="post[0].postCoverImageName">
         </div>
         <div class="intro">
-            <small>{{ currentPost[0].postTitle }}</small>
+            <small>{{ post[0].postTitle }}</small>
         </div>
-        <div class="content-html" v-html="currentPost[0].postHTML">
+        <div class="content-html" v-html="post[0].postHTML">
         </div>
         <div class="tag-cont" ref="tag">
             <div>
@@ -30,16 +30,16 @@
         <div :class="{ share: true, show: show}">
             <small>Bagikan ke:</small>
             <div class="social-media">
-                <ShareNetwork network="whatsapp" :url="url" :title="title" aria-label="whatsapp" class="st-custom-button"><span><i class="fab fa-whatsapp"></i></span></ShareNetwork>
-                <ShareNetwork network="twitter" :url="url" :title="title" aria-label="twitter" class="st-custom-button"><span><i class="fab fa-twitter"></i></span></ShareNetwork>
-                <ShareNetwork network="facebook" :url="url" :title="title" aria-label="facebook" :description="description" :hashtags="currentPost[0].postTags" class="st-custom-button" ><span><i class="fab fa-facebook-f"></i></span></ShareNetwork>
-                <ShareNetwork network="telegram" :url="url" :title="title" aria-label="telegram" class="st-custom-button"><span><i class="fab fa-telegram"></i></span></ShareNetwork>
+                <ShareNetwork network="whatsapp" :url="url" :title="post[0].postTitle" aria-label="whatsapp" class="st-custom-button"><span><i class="fab fa-whatsapp"></i></span></ShareNetwork>
+                <ShareNetwork network="twitter" :url="url" :title="post[0].postTitle" aria-label="twitter" class="st-custom-button"><span><i class="fab fa-twitter"></i></span></ShareNetwork>
+                <ShareNetwork network="facebook" :url="url" :title="post[0].postTitle" aria-label="facebook" :description="post[0].postMetaDesc" :hashtags="post[0].postTags" class="st-custom-button" ><span><i class="fab fa-facebook-f"></i></span></ShareNetwork>
+                <ShareNetwork network="telegram" :url="url" :title="post[0].postTitle" aria-label="telegram" class="st-custom-button"><span><i class="fab fa-telegram"></i></span></ShareNetwork>
             </div>
         </div>
         <div v-if="$store.state.isAdmin" class="admin-opt">
             <div class="admin-btn">
-                <nuxt-link :to="{ name: 'edit-post-id-title', params: { id: currentPost[0].postId, title: currentPost[0].postTitle.replace(/\s+/g, '-').toLowerCase() }}" class="post-tools edit"><span><i class="fas fa-pen"></i></span> Edit Post</nuxt-link>
-                <button @click="deleteConf" class="post-tools delete"><span><i class="far fa-trash-alt"></i></span> Delete Post</button>
+                <nuxt-link :to="{ name: 'edit-post-id-title', params: { id: post[0].postId, title: post[0].postTitle.replace(/\s+/g, '-').toLowerCase() }}" aria-label="edit" class="post-tools edit"><span><i class="fas fa-pen"></i></span> Edit Post</nuxt-link>
+                <button @click="deleteConf" aria-label="delete-button" class="post-tools delete"><span><i class="far fa-trash-alt"></i></span> Delete Post</button>
             </div>
         </div>
     </article>
@@ -50,15 +50,18 @@
 export default {
     head() {
         return {
-            title: this.currentPost[0].postTitle,
+            title: this.post[0].postTitle,
             meta: [
-                { hid: "description", name: "description", content: this.description },
+                { hid: "description", name: "description", content: this.post[0].postMetaDesc },
                 { name: "twitter:card", content: "summary" },
                 { property: "og:type", content: "article" },
                 { property: "og:url", content: this.url },
-                { property: "og:title", content: this.title },
-                { property: "og:description", content: this.description },
-                { property: "og:image", content: this.image },
+                { property: "og:title", content: this.post[0].postTitle },
+                { property: "og:description", content: this.post[0].postMetaDesc },
+                { property: "og:image", content: this.post[0].postCoverImage },
+            ],
+            link: [
+                { rel: "canonical", href: this.url }
             ]
         }
     },
@@ -66,31 +69,24 @@ export default {
         return {
             currentPost: null,
             isConf: null,
-            description: '',
             url: null,
-            title: '',
-            image: null,
-            author: '',
-            category: '',
             show: null,
             footerNum: null,
             loading: true,
         }
     },
-    created() {
-        this.currentPost = this.$store.state.posts.filter((post) => {
-            return post.postId === this.$route.params.id
+    async asyncData({ params, store }) {
+        const post = store.state.posts.filter((post) => {
+            return post.postId === params.id
         })
 
-        this.description = this.currentPost[0].postMetaDesc
+        return { post }
+    },
+    created() {
         this.url = `http://wibro.herokuapp.com${this.$route.path}`
-        this.title = this.currentPost[0].postTitle
-        this.image = this.currentPost[0].postCoverImage
-        this.category = this.currentPost[0].postCategory
-        this.author = this.currentPost[0].postAuthor
     },
     mounted() {
-        this.loading = null
+        this.loading = false
         window.addEventListener('scroll', this.handleScroll )
     },
     beforeDestroy() {
@@ -98,7 +94,7 @@ export default {
     },
     methods: {
         async deletePost() {
-            this.$store.dispatch("deletePost", this.currentPost[0].postId)
+            this.$store.dispatch("deletePost", this.post[0].postId)
             await this.$router.push('/')
             this.$nuxt.refresh()
         },
@@ -121,7 +117,7 @@ export default {
     },
     computed: {
         postTags() {
-            const tags = this.currentPost[0].postTags
+            const tags = this.post[0].postTags
             return tags.split(',')
         },
     }

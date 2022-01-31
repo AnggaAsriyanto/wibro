@@ -2,14 +2,14 @@
   <fragment>
     <div v-if="!loading" class="post-card-list">
         <nuxt-link
-        v-for="(post, idx) in postsFeeds" 
+        v-for="(post, idx) in this.postsLists" 
         :key="idx"
         :to="{ name: 'posts-id-title', params: { title: post.postTitle.replace(/\s+/g, '-').toLowerCase(), id: post.postId } }">
             <PostCard :post="post" />
         </nuxt-link>
     </div>
     <CompLoad v-else />
-    <div v-show="postsFeeds.length == 9 && !loading" class="more-posts">
+    <div v-show="this.postsLists.length == 9 && !loading" class="more-posts">
        <nuxt-link :to="{ name: 'posts-pages-idx', params: { idx: 1} }">
           <h5>Lihat lebih banyak <span><i class="fas fa-arrow-right"></i></span></h5>
        </nuxt-link>
@@ -24,25 +24,25 @@ export default {
     return {
       title: 'Info Anime Terupdate | Wibro',
       meta: [
-        { name: 'description', content: 'List berita dan info anime terbaru'}
+        { hid: 'description', name: 'description', content: 'List berita dan info anime terbaru'}
+      ],
+      link: [
+        { rel: "canonical", href: "https://wibro.herokuapp.com/" }
       ]
     }
   },
   data() {
     return {
-      loading: true
+      loading: true,
     }
+  },
+  async asyncData({store}) {
+    const postsLists = store.getters.postsFeeds
+
+    return { postsLists }
   },
   mounted() {
     this.loading = false
-  },
-  destroyed() {
-    this.loading = true
-  },
-  computed: {
-    postsFeeds() {
-      return this.$store.getters.postsFeeds
-    },
   }
 }
 </script>
