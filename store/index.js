@@ -22,7 +22,6 @@ export const state = () => ({
     profileId: null,
     isBar: null,
     isInfoUser: null,
-    firstReload: null,
 })
 
 export const getters = {
@@ -155,9 +154,6 @@ export const mutations = {
     resetBarInfoUser(state) {
         state.isBar = false
         state.isInfoUser = false
-    },
-    changeFirstReload(state) {
-        state.firstReload = true
     }
 }
 
@@ -231,12 +227,11 @@ export const actions = {
         await dispatch('getCurrentUser', authUser)
     },
     async nuxtServerInit({ state, dispatch, commit }, { res }) {
-        if (res && res.locals && res.locals.user && state.firstReload ) {
+        if (res && res.locals && res.locals.user ) {
           const { allClaims: claims, idToken: token, ...authUser } = res.locals.user
 
           await dispatch("onAuthStateChangedAction", { authUser })      
         } else {
-            await commit("changeFirstReload")            
             await dispatch("isAnonymous")
         } 
     }
