@@ -52,6 +52,19 @@ export default {
       xxl: 1536,
       '2xl': 1536
     },
+    providers: {
+      customProvider: {
+        provider: '~/providers/custom',
+        options: {}
+      }
+    },
+    presets: {
+      avatar: {
+        modifiers: {
+          format: 'webp'
+        }
+      }
+    }
   },
 
   // Modules: https://go.nuxtjs.dev/config-modules
