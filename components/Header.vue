@@ -3,7 +3,7 @@
 		<nav>
 			<div class="nav-menu">
 				<div class="menu-bar">
-					<button @click="toggleBar" aria-label="toggle-bar" type="button" class="toggle-bar">
+					<button @click="toggleBar" aria-label="toggle" type="button" class="toggle-bar">
 						<i class="fas fa-bars"></i>
 					</button>
 				</div>

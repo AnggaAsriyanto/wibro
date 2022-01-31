@@ -12,7 +12,7 @@
             <small>{{ new Date(post[0].postDate).toLocaleString("id", { dateStyle: "long"}) }}</small>
         </div>
         <div class="img-container">
-            <img :src="post[0].postCoverImage" :alt="post[0].postCoverImageName">
+            <nuxt-img format="webp" sizes="xl:100vw lg:100vw md:100vw sm:100vw xs:100vw" :src="post[0].postCoverImage" :alt="post[0].postCoverImageName"  />
         </div>
         <div class="intro">
             <small>{{ post[0].postTitle }}</small>
@@ -83,7 +83,7 @@ export default {
         return { post }
     },
     created() {
-        this.url = `http://wibro.herokuapp.com${this.$route.path}`
+        this.url = `https://wibro.herokuapp.com${this.$route.path}`
     },
     mounted() {
         this.loading = false
