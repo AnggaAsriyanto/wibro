@@ -14,7 +14,7 @@
 				</div>
 				<div class="user-cont">
 					<div @click="showUser" class="user">
-						<img v-if="$store.state.profilePhoto" :src="$store.state.profilePhoto" :alt="$store.state.profilePhotoName">
+						<img loading="lazy" v-if="$store.state.profilePhoto" :src="$store.state.profilePhoto" :alt="$store.state.profilePhotoName">
 						<img v-else src="../static/user.svg" alt="user">
 					</div>
 					<div v-if="$store.state.isInfoUser" class="info-user">
@@ -185,7 +185,7 @@ nav {
 		text-align: center;
 		border-radius: 10px;
 		background-color: #fff;
-		box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
+		border: 1px solid #dfdfdf
 	}
 	.option {
 		>div {

@@ -11,7 +11,7 @@
       <div class="website-info">
         <h2>Website</h2>
         <p>
-          Didirikan pada awal tahun 2022 menggunakan Vue.js, Nuxt.js dan Firebase oleh <a target="_blank" href="https://www.linkedin.com/in/angga-asriyanto-web-dev">Angga Asriyanto</a>.
+          Develope by <a target="_blank" href="https://www.linkedin.com/in/angga-asriyanto-web-dev">Angga Asriyanto</a>, Desember 2021 menggunakan Nuxt.js dan Firebase.
         </p>
       </div>
     </div>

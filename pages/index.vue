@@ -27,7 +27,7 @@ export default {
         { hid: 'description', name: 'description', content: 'List berita dan info anime terbaru'}
       ],
       link: [
-        { rel: "canonical", href: "https://wibro.herokuapp.com/" }
+        { rel: "canonical", href: "https://wibro.site/" }
       ]
     }
   },

@@ -158,11 +158,16 @@ export const mutations = {
 }
 
 export const actions = {
-    async getCurrentUser({state, commit}, payload) {
+    async getCurrentUser({state, commit, dispatch}, payload) {
         const database = await this.$fire.firestore.collection("users").doc(payload.uid)
-        const dbResults = await database.get()
-        if(!state.isAnonymous) {
-            commit("setProfileInfo", dbResults)  
+        try {
+            const dbResults = await database.get()
+            if(!state.isAnonymous) {
+                commit("setProfileInfo", dbResults) 
+            }
+        }
+        catch(err) {
+            console.log('error:', err)
         }
     },
     async getPosts({ state, commit }) {

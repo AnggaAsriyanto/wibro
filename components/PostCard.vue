@@ -2,7 +2,7 @@
   <section class="post-card">
       <div class="img-post">
           <div class="img-container">
-              <nuxt-img v-if="post.postCoverImage" format="webp" sizes="xl:100vw lg:100vw md:100vw sm:100vw xs:100vw" :src="post.postCoverImage" :alt="post.postCoverImageName"/>
+              <nuxt-img v-if="post.postCoverImage" loading="lazy" format="webp" sizes="xl:100vw lg:100vw md:100vw sm:100vw xs:100vw" :src="post.postCoverImage" :alt="post.postCoverImageName"/>
 			  <ImageLoad v-else />
           </div>
       </div>
