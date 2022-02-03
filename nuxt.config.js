@@ -41,6 +41,7 @@ export default {
   buildModules: [
     '@nuxt/image',
     'nuxt-compress',
+    '@nuxtjs/google-fonts',
   ],
 
   image: {
@@ -69,8 +70,7 @@ export default {
   },
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ["vue2-editor/nuxt", "vue-social-sharing/nuxt", "@nuxtjs/robots",  "@nuxtjs/sitemap", "nuxt-compress", 
-  "@nuxtjs/google-fonts", [
+  modules: ["vue2-editor/nuxt", "vue-social-sharing/nuxt", "@nuxtjs/robots",  "@nuxtjs/sitemap", "nuxt-compress", [
     '@nuxtjs/firebase',
     {
       config: {
