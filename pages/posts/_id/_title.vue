@@ -1,30 +1,30 @@
 <template>
-    <article v-if="!loading" class="post-article" lang="id">
+    <article v-if="!loading" class="post-article" lang="id" itemscope itemtype="https://schema.org/Article">
         <Conf v-show="isConf" :cancle="cancle" :deletePost="deletePost" :postTitle="post[0].postTitle" />
         <div class="category">
-            <nuxt-link :class="post[0].postCategory" aria-label="category" to="#">{{ post[0].postCategory }}</nuxt-link>
+            <nuxt-link itemprop="about" :class="post[0].postCategory" aria-label="category" to="#">{{ post[0].postCategory }}</nuxt-link>
         </div>
         <div class="title">
-            <h1>{{ post[0].postTitle }}</h1>
+            <h1 itemprop="name">{{ post[0].postTitle }}</h1>
         </div>
         <div class="info">
-            <small>Published by {{ post[0].postAuthor }}</small>
-            <small>{{ new Date(post[0].postDate).toLocaleString("id", { dateStyle: "long"}) }}</small>
+            <small>Published by <span itemprop="author">{{ post[0].postAuthor }}</span></small>
+            <small itemprop="datePublished">{{ new Date(post[0].postDate).toLocaleString("id", { dateStyle: "long"}) }}</small>
         </div>
         <div class="img-container">
-            <nuxt-img loading="lazy" format="webp" sizes="xl:100vw lg:100vw md:100vw sm:100vw xs:100vw" :src="post[0].postCoverImage" :alt="post[0].postCoverImageName"  />
+            <nuxt-img itemprop="image" loading="lazy" format="webp" sizes="xl:100vw lg:100vw md:100vw sm:100vw xs:100vw" :src="post[0].postCoverImage" :alt="post[0].postCoverImageName"  />
         </div>
         <div class="intro">
             <small>{{ post[0].postTitle }}</small>
         </div>
-        <div class="content-html" v-html="post[0].postHTML">
+        <div class="content-html" itemprop="articleBody" v-html="post[0].postHTML">
         </div>
         <div class="tag-cont" ref="tag">
             <div>
                 <small>Tags :</small>
             </div>
             <div class="tag-list">
-                <span v-for="(postTag, idx) in postTags" :key="idx">#{{ postTag.trim() }}</span>
+                <span v-for="(postTag, idx) in postTags" :key="idx" itemprop="keywords">#{{ postTag.trim() }}</span>
             </div>
         </div>
         <div :class="{ share: true, show: show}">
