@@ -1,5 +1,5 @@
 <template>
-    <article v-if="!loading" class="post-article" lang="id" itemscope itemtype="https://schema.org/Article">
+    <article v-show="this.post" class="post-article" lang="id" itemscope itemtype="https://schema.org/Article">
         <Conf v-show="isConf" :cancle="cancle" :deletePost="deletePost" :postTitle="post[0].postTitle" />
         <div class="category">
             <nuxt-link itemprop="about" :class="post[0].postCategory" aria-label="category" to="#">{{ post[0].postCategory }}</nuxt-link>
@@ -43,7 +43,6 @@
             </div>
         </div>
     </article>
-    <CompLoad v-else />
 </template>
 
 <script>
