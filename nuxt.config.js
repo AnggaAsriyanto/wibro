@@ -40,6 +40,7 @@ export default {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     '@nuxt/image',
+    'nuxt-compress',
   ],
 
   image: {
@@ -68,7 +69,8 @@ export default {
   },
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ["vue2-editor/nuxt", "vue-social-sharing/nuxt", "@nuxtjs/robots",  "@nuxtjs/sitemap", [
+  modules: ["vue2-editor/nuxt", "vue-social-sharing/nuxt", "@nuxtjs/robots",  "@nuxtjs/sitemap", "nuxt-compress", 
+  "@nuxtjs/google-fonts", [
     '@nuxtjs/firebase',
     {
       config: {
@@ -125,6 +127,24 @@ export default {
     routes: [
       'posts/DQGsQDE8orJKZYHZUS1C/bocoran-manga-attack-on-titans-terbaru!',
     ]
+  },
+
+  "nuxt-compress": {
+    gzip: {
+      threshold: 8192,
+    },
+    brotli: {
+      threshold: 8192,
+    }
+  },
+
+  googleFonts: {
+    families: {
+      Poppins: [400, 700, 800],
+      'Open+Sans': [400, 500, 700],
+    },
+    display: 'fallback',
+    preload: true,
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

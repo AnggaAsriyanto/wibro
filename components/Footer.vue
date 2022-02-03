@@ -50,7 +50,7 @@ footer {
 		background-color: rgba(0, 0, 0, 0.2);
 		p {
 			margin-top: 0.2rem;
-			font-size: 0.7rem;
+			font-size: 0.75rem;
 			letter-spacing: 0.5px;
 			line-height: 1.3rem;
 			width: 90%;
