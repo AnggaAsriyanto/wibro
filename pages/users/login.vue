@@ -65,7 +65,9 @@ export default {
 
                 if(res) {
                     await this.$router.push('/')
-                    await this.$nuxt.refresh()
+                    setTimeout(() => {
+                        window.location.reload()
+                    }, 500);
                     return
                 }
 

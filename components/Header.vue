@@ -103,7 +103,7 @@ export default {
 		async logOut() {
 			await this.$fire.auth.signOut()
 			await this.$store.dispatch('isAnonymous')
-			await this.$nuxt.refresh()
+			window.location.reload()
 			this.$store.commit("toggleInfoUser")
 		}
     }
@@ -202,6 +202,9 @@ nav {
 			font-size: inherit;
 			color: red;
 			cursor: pointer;
+			&:active {
+				opacity: 0;
+			}
 		}
 	}
 	hr {

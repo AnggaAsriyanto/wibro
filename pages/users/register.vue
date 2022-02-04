@@ -98,8 +98,11 @@ export default {
                         photo: null,
                         photoName: '',
                     })
-                    this.$store.commit('unload')
-                    this.$router.push('/')
+                    await this.$store.commit('unload')
+                    await this.$router.push('/')
+                    setTimeout(() => {
+                        window.location.reload()
+                    }, 500);
                     return
                 }
 

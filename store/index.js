@@ -22,6 +22,7 @@ export const state = () => ({
     profileId: null,
     isBar: null,
     isInfoUser: null,
+    onReload: null,
 })
 
 export const getters = {
@@ -55,7 +56,6 @@ export const mutations = {
         state.profilePhoto = null;
         state.profilePhotoName = '';
         state.profileUsername = null;
-        console.log(state.profileUsername)
     },
     updateAdminStatus(state) {
         state.isAdmin = true
@@ -154,17 +154,21 @@ export const mutations = {
     resetBarInfoUser(state) {
         state.isBar = false
         state.isInfoUser = false
+    },
+    needReload(state) {
+        state.onReload = true
+    },
+    doneReload(state) {
+        state.onReload = false
     }
 }
 
 export const actions = {
     async getCurrentUser({state, commit, dispatch}, payload) {
-        const database = await this.$fire.firestore.collection("users").doc(payload.uid)
+        const database = await this.$fire.firestore.collection("users").doc(payload)
         try {
             const dbResults = await database.get()
-            if(!state.isAnonymous) {
-                commit("setProfileInfo", dbResults) 
-            }
+            commit("setProfileInfo", dbResults) 
         }
         catch(err) {
             console.log('error:', err)
@@ -208,36 +212,36 @@ export const actions = {
         await this.$fire.auth.signInAnonymously()
         .then(() => {
             console.log('🍕 Run No User')
-            commit('thisAnonymous')
             return;
         })
         .catch((err) => {
             console.log(err)
         })
     },
-    async onAuthStateChangedAction({ state, commit, dispatch }, { authUser } ) {
+    async onAuthStateChangedAction({ state, commit, dispatch }, authUser ) {
         console.log('state-changed')
         if(!authUser) {
+            await dispatch("isAnonymous")
             commit('clearProfileInfo')
-            return 
+            return
         } 
 
         if(!authUser.email) {
-            console.log('🌍 No User')
-            commit('thisAnonymous')
+            console.log('👨‍💻🤯')
             return
-        }
-        
-        commit('notAnonymous')
-        await dispatch('getCurrentUser', authUser)
+        } 
+
+        await dispatch('getCurrentUser', authUser.uid)
     },
     async nuxtServerInit({ state, dispatch, commit }, { res }) {
         if (res && res.locals && res.locals.user ) {
           const { allClaims: claims, idToken: token, ...authUser } = res.locals.user
 
-          await dispatch("onAuthStateChangedAction", { authUser })      
-        } else {
-            await dispatch("isAnonymous")
-        } 
+          await dispatch("onAuthStateChangedAction",  authUser )
+          return     
+        }
+
+        await dispatch("onAuthStateChangedAction",  null )
+        return
     }
 }
