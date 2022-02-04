@@ -262,7 +262,7 @@ form.admin {
 		min-height: 300px;
 	}
 	.tag-list {
-		span {
+		>span {
 			font-weight: 500;
 			font-size: .9rem;
 			background-color: rgb(124, 185, 255);

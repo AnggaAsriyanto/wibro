@@ -2,7 +2,7 @@
     <article v-show="this.post" class="post-article" lang="id" itemscope itemtype="https://schema.org/Article">
         <Conf v-show="isConf" :cancle="cancle" :deletePost="deletePost" :postTitle="post[0].postTitle" />
         <div class="category">
-            <nuxt-link itemprop="about" :class="post[0].postCategory" aria-label="category" to="#">{{ post[0].postCategory }}</nuxt-link>
+            <nuxt-link :class="post[0].postCategory" aria-label="category" to="#"><span itemprop="about">{{ post[0].postCategory }}</span></nuxt-link>
         </div>
         <div class="title">
             <h1 itemprop="name">{{ post[0].postTitle }}</h1>
@@ -12,7 +12,7 @@
             <small itemprop="datePublished">{{ new Date(post[0].postDate).toLocaleString("id", { dateStyle: "long"}) }}</small>
         </div>
         <div class="img-container">
-            <nuxt-img itemprop="image" loading="lazy" format="webp" sizes="xl:100vw lg:100vw md:100vw sm:100vw xs:100vw" :src="post[0].postCoverImage" :alt="post[0].postCoverImageName"  />
+            <nuxt-img itemprop="image" format="webp" sizes="xl:100vw lg:100vw md:100vw sm:100vw xs:100vw" :src="post[0].postCoverImage" :alt="post[0].postCoverImageName"  />
         </div>
         <div class="intro">
             <small>{{ post[0].postTitle }}</small>
@@ -24,7 +24,7 @@
                 <small>Tags :</small>
             </div>
             <div class="tag-list">
-                <span v-for="(postTag, idx) in postTags" :key="idx" itemprop="keywords">#{{ postTag.trim() }}</span>
+                <span v-for="(postTag, idx) in postTags" :key="idx">#<span itemprop="keywords">{{ postTag.trim() }}</span></span>
             </div>
         </div>
         <div :class="{ share: true, show: show}">
