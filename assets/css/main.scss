@@ -255,6 +255,19 @@ form.admin {
 			margin-bottom: 0.5rem;
 			word-spacing: 1px;
 		}
+		
+		a {
+			text-decoration: none;
+		}
+
+		iframe {
+			min-height: 200px;
+			width: 100%;
+			background-color: #c4c4c4;
+			@media (min-width: 550px) {
+				width: 50%;
+			}
+		}
 	}
 	.adv {
 		background-color: khaki;

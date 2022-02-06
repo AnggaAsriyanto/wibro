@@ -1,5 +1,16 @@
 <template>
   <div class="app">
+    <header>
+        <nav>
+            <div class="nav-menu">
+                <div class="brand">
+                    <nuxt-link to="/">
+                      <img src="../static/wibro.svg" alt="wibro logo">
+                    </nuxt-link>
+                </div>
+            </div>
+        </nav>
+    </header>
     <main class="main">
       <Loading v-if="$store.state.postsLoad" />
       <div :class="{ content: true, post: isPost, focus: isFocus }">

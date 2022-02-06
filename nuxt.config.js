@@ -1,3 +1,4 @@
+
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -84,13 +85,7 @@ export default {
       },
       services: {
         auth: {
-          persistence: 'local',
-          initialize: {
-            onAuthStateChangedAction: 'onAuthStateChangedAction',
-            subscribeManually: false
-          },
           ssr: true,
-          emulatorHost: 'http://localhost',
         },
         firestore: true,
         functions: true,
@@ -121,11 +116,11 @@ export default {
   },
 
   sitemap: {
-    hostname: 'https://wibro.herokuapp.com/',
+    hostname: 'https://wibro.site/',
     gzip: true,
     exclude: ['/admin'],
     routes: [
-      'posts/DQGsQDE8orJKZYHZUS1C/bocoran-manga-attack-on-titans-terbaru!',
+      'posts/UdMVSdLBHWFIWS5e6CzA/ousama-ranking,-anime-dengan-grafik-sederhana-tapi-cerita-luar-biasa',
     ]
   },
 

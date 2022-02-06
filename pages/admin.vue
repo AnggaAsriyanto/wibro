@@ -8,7 +8,7 @@
             <input v-model.trim="adminCode" @click="removeError" id="admin-code" type="text" autocomplete="off" required>
         </div>
         <small v-if="error" class="error small">{{ error }}</small>
-        <button>Submit</button>
+        <button class="submit">Submit</button>
     </form>
 </template>
 
@@ -43,7 +43,10 @@ export default {
                     })
 
                     await this.$store.commit('updateAdminStatus')
-                    this.$router.push('/')
+                    await this.$router.push('/')
+                    setTimeout(() => {
+                        window.location.reload()
+                    }, 500);
                     return
                 }
 

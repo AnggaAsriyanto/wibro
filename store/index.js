@@ -22,7 +22,6 @@ export const state = () => ({
     profileId: null,
     isBar: null,
     isInfoUser: null,
-    onReload: null,
 })
 
 export const getters = {
@@ -155,11 +154,8 @@ export const mutations = {
         state.isBar = false
         state.isInfoUser = false
     },
-    needReload(state) {
-        state.onReload = true
-    },
-    doneReload(state) {
-        state.onReload = false
+    userAnonymous(state) {
+        state.user = true
     }
 }
 
@@ -212,25 +208,26 @@ export const actions = {
         await this.$fire.auth.signInAnonymously()
         .then(() => {
             console.log('🍕 Run No User')
+            commit('userAnonymous')
             return;
         })
         .catch((err) => {
             console.log(err)
         })
     },
-    async onAuthStateChangedAction({ state, commit, dispatch }, authUser ) {
+    async onAuthStateChangedAction({ state, commit, dispatch, res }, authUser ) {
         console.log('state-changed')
-        if(!authUser) {
-            await dispatch("isAnonymous")
+        console.log(authUser)
+
+        const user = await this.$fire.auth.currentUser
+        
+        if(!authUser || !authUser.email || user === null) {
             commit('clearProfileInfo')
+            await dispatch("isAnonymous")
             return
-        } 
+        }
 
-        if(!authUser.email) {
-            console.log('👨‍💻🤯')
-            return
-        } 
-
+        console.log('pass')
         await dispatch('getCurrentUser', authUser.uid)
     },
     async nuxtServerInit({ state, dispatch, commit }, { res }) {

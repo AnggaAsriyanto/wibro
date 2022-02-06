@@ -1,6 +1,6 @@
 <template>
   <fragment>
-    <div v-if="!loading && !$store.state.onReload" class="post-card-list">
+    <div v-if="!loading" class="post-card-list">
         <nuxt-link
         v-for="(post, idx) in this.postsLists" 
         :key="idx"

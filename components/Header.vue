@@ -18,7 +18,7 @@
 						<img v-else src="../static/user.svg" alt="user">
 					</div>
 					<div v-if="$store.state.isInfoUser" class="info-user">
-						<div v-if="!$store.state.user" class="option">
+						<div v-if="!$store.state.profileUsername" class="option">
 							<div>
 								<nuxt-link @click.native="showUser" :to="{ name: 'users-login' }">Login</nuxt-link>
 							</div>
@@ -27,7 +27,7 @@
 								<nuxt-link @click.native="showUser" :to="{ name: 'users-register' }">Daftar</nuxt-link>
 							</div>
 						</div>
-						<div v-if="$store.state.user" class="option">
+						<div v-if="$store.state.profileUsername" class="option">
 							<div v-if="username">
 								<p>{{ username }}</p>
 							</div>
@@ -69,7 +69,7 @@
 					<div>
 						<nuxt-link @click.native="toggleBar" :to="{ name: 'contact' }">Contact</nuxt-link>
 					</div>
-					<div v-if="$store.state.user">
+					<div v-if="$store.state.profileUsername">
 						<nuxt-link @click.native="toggleBar" :to="{ name: 'admin' }">Admin</nuxt-link>
 					</div>
 				</div>
