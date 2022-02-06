@@ -98,7 +98,6 @@ export const mutations = {
     },
     updatePostHTML(state, payload) {
         state.postHTML = payload
-        console.log(payload)
     },
     addPost(state, payload) {
         state.posts.push(payload)
