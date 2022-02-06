@@ -95,6 +95,9 @@ export default {
         async deletePost() {
             this.$store.dispatch("deletePost", this.post[0].postId)
             await this.$router.push('/')
+            setTimeout(() => {
+                window.location.reload()
+            }, 500);
             this.$nuxt.refresh()
         },
         deleteConf() {
