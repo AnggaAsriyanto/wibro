@@ -1,3 +1,4 @@
+import { NoEmitOnErrorsPlugin } from "webpack";
 
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -10,14 +11,14 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'Berita dan Info terbaru Anime di Indonesia' },
+      { hid: 'description', name: 'description', content: 'Wibro Situs Berita dan Info terbaru Anime di Indonesia, Anime Indonesia 2022 terbaru, list anime terupdate 2022, Berita anime terlengkap Indonesia, Berita anime, Info anime, Anime Indonesia' },
       { name: 'format-detection', content: 'telephone=no' },
       { name: 'author', content: 'Angga Asriyanto'}
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/wibro.svg' },
       { rel: "stylesheet", href: "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css", integrity: "sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==", crossorigin: "anonymous", referrerpolicy: "no-referrer" },
-    ]
+    ],
   },
 
   loading: {
@@ -71,7 +72,8 @@ export default {
   },
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ["vue2-editor/nuxt", "vue-social-sharing/nuxt", "@nuxtjs/robots",  "@nuxtjs/sitemap", "nuxt-compress", [
+  modules: ["vue2-editor/nuxt", "vue-social-sharing/nuxt", "@nuxtjs/robots",  "@nuxtjs/sitemap", "nuxt-compress",
+  [
     '@nuxtjs/firebase',
     {
       config: {

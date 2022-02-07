@@ -22,9 +22,9 @@
             <div class="social-media">
                 <small>Follow Us</small>
                 <div class="social-link">
-                    <nuxt-link to="#"><i class="fab fa-facebook-f"></i></nuxt-link>
-                    <nuxt-link to="#"><i class="fab fa-instagram"></i></nuxt-link>
-                    <nuxt-link to="#"><i class="fab fa-twitter"></i></nuxt-link>
+                    <a href="https://discord.gg/Uyr8Ms4auS" target="_blank" rel="noreferrer" aria-label="discord"><i class="fab fa-discord"></i></a>
+                    <a href="https://www.instagram.com/bang_wibro/" target="_blank" rel="noreferrer"  aria-label="instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://twitter.com/bangwibro" target="_blank" rel="noreferrer" aria-label="twitter"><i class="fab fa-twitter"></i></a>
                 </div>
             </div>
         </div>

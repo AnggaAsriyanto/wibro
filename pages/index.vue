@@ -23,9 +23,6 @@ export default {
   head() {
     return {
       title: 'Info Anime Terupdate | Wibro',
-      meta: [
-        { hid: 'description', name: 'description', content: 'List berita dan info anime terbaru 2022'}
-      ],
       link: [
         { rel: "canonical", href: "https://wibro.site/" }
       ]
