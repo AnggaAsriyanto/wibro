@@ -19,6 +19,15 @@
         </div>
         <div class="content-html" itemprop="articleBody" v-html="post[0].postHTML">
         </div>
+        <div class="ads">
+            <Adsense
+                v-if="!loading"
+                data-ad-client="ca-pub-1142153237520676"
+                data-ad-slot="3450190651"
+                data-ad-format="auto"
+                data-full-width-responsive="yes">
+            </Adsense>
+        </div>
         <div class="tag-cont" ref="tag">
             <div>
                 <small>Tags :</small>

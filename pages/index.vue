@@ -9,6 +9,13 @@
         </nuxt-link>
     </div>
     <CompLoad v-else />
+    <InFeedAdsense
+        v-if="mobile"
+        data-ad-format="fluid"
+        data-ad-layout-key="-63+dk-3p-8u+153"
+        data-ad-client="ca-pub-1142153237520676"
+        data-ad-slot="9728959860">
+    </InFeedAdsense>
     <div v-show="this.postsLists.length == 9 && !loading" class="more-posts">
        <nuxt-link :to="{ name: 'posts-pages-idx', params: { idx: 1} }">
           <h5>Lihat lebih banyak <span><i class="fas fa-arrow-right"></i></span></h5>
@@ -31,6 +38,7 @@ export default {
   data() {
     return {
       loading: true,
+      mobile: null,
     }
   },
   async asyncData({store}) {
@@ -38,8 +46,14 @@ export default {
 
     return { postsLists }
   },
-  async mounted() {
+  mounted() {
     this.loading = false
+    if(window.innerWidth < 550) {
+      this.mobile = true
+      return
+    }
+
+    this.mobile = false
   }
 }
 </script>
