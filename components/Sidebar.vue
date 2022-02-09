@@ -1,12 +1,12 @@
 <template>
   <div class="sidebar">
     <div class="ads-sidebar">
-      <Adsense
+      <!-- <Adsense
         v-if="desktop"
         style="display:inline-block;width:250px;height:250px"
         data-ad-client="ca-pub-1142153237520676"
         data-ad-slot="7053010856">
-      </Adsense>
+      </Adsense> -->
     </div>
   </div>
 </template>

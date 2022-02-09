@@ -11,7 +11,7 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'Wibro Situs Berita dan Info terbaru Anime di Indonesia, Anime Indonesia 2022 terbaru, list anime terupdate 2022, Berita anime terlengkap Indonesia, Berita anime, Info anime, Anime Indonesia' },
+      { hid: 'description', name: 'description', content: 'Wibro Situs Berita dan Info Anime terbaru di Indonesia, berfokus membahas anime dan jejepangan, Blog Anime Indonesia' },
       { name: 'format-detection', content: 'telephone=no' },
       { name: 'author', content: 'Angga Asriyanto'}
     ],
@@ -19,6 +19,10 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/wibro.svg' },
       { rel: "stylesheet", href: "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css", integrity: "sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==", crossorigin: "anonymous", referrerpolicy: "no-referrer" },
     ],
+    // script: [
+    //   { async: true, src: "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1142153237520676",
+    //   crossorigin: "anonymous" }
+    // ],
   },
 
   loading: {

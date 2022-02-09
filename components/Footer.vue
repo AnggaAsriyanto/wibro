@@ -4,7 +4,7 @@
             <figure class="img-cont">
 				<img src="../static/wibro-bb.svg" alt="wibro"> <h1>ibro</h1>
 			</figure>
-            <p>Berita dan Info Anime Terupdate, © Copyright 2022</p>
+            <p>Situs Blog Berita dan Info Anime terupdate di Indonesia, Wibro © Copyright 2022</p>
         </div>
 
         <div class="link">

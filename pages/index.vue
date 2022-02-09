@@ -1,21 +1,22 @@
 <template>
   <fragment>
-    <div v-if="!loading" class="post-card-list">
-        <nuxt-link
-        v-for="(post, idx) in this.postsLists" 
-        :key="idx"
-        :to="{ name: 'posts-id-title', params: { title: post.postTitle.replace(/\s+/g, '-').toLowerCase(), id: post.postId } }">
-            <PostCard :post="post" />
-        </nuxt-link>
-    </div>
-    <CompLoad v-else />
-    <InFeedAdsense
+    <client-only>
+      <div class="post-card-list">
+          <nuxt-link
+          v-for="(post, idx) in this.postsLists" 
+          :key="idx"
+          :to="{ name: 'posts-id-title', params: { title: post.postTitle.replace(/\s+/g, '-').toLowerCase(), id: post.postId } }">
+              <PostCard v-show="post" :post="post" />
+          </nuxt-link>
+      </div>
+    </client-only>
+    <!-- <InFeedAdsense
         v-if="mobile"
         data-ad-format="fluid"
         data-ad-layout-key="-63+dk-3p-8u+153"
         data-ad-client="ca-pub-1142153237520676"
         data-ad-slot="9728959860">
-    </InFeedAdsense>
+    </InFeedAdsense> -->
     <div v-show="this.postsLists.length == 9 && !loading" class="more-posts">
        <nuxt-link :to="{ name: 'posts-pages-idx', params: { idx: 1} }">
           <h5>Lihat lebih banyak <span><i class="fas fa-arrow-right"></i></span></h5>
