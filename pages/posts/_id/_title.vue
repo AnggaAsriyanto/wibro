@@ -39,10 +39,10 @@
         <div :class="{ share: true, show: show}">
             <small>Bagikan ke:</small>
             <div class="social-media">
-                <ShareNetwork network="whatsapp" :url="url" :title="post[0].postTitle" aria-label="whatsapp" class="st-custom-button"><span><i class="fab fa-whatsapp"></i></span></ShareNetwork>
-                <ShareNetwork network="twitter" :url="url" :title="post[0].postTitle" aria-label="twitter" class="st-custom-button"><span><i class="fab fa-twitter"></i></span></ShareNetwork>
-                <ShareNetwork network="facebook" :url="url" :title="post[0].postTitle" aria-label="facebook" :description="post[0].postMetaDesc" :hashtags="post[0].postTags" class="st-custom-button" ><span><i class="fab fa-facebook-f"></i></span></ShareNetwork>
-                <ShareNetwork network="telegram" :url="url" :title="post[0].postTitle" aria-label="telegram" class="st-custom-button"><span><i class="fab fa-telegram"></i></span></ShareNetwork>
+                <ShareNetwork rel="nofollow" network="whatsapp" :url="url" :title="post[0].postTitle" aria-label="whatsapp" class="st-custom-button"><span><i class="fab fa-whatsapp"></i></span></ShareNetwork>
+                <ShareNetwork rel="nofollow" network="twitter" :url="url" :title="post[0].postTitle" aria-label="twitter" class="st-custom-button"><span><i class="fab fa-twitter"></i></span></ShareNetwork>
+                <ShareNetwork rel="nofollow" network="facebook" :url="url" :title="post[0].postTitle" aria-label="facebook" :description="post[0].postMetaDesc" :hashtags="post[0].postTags" class="st-custom-button" ><span><i class="fab fa-facebook-f"></i></span></ShareNetwork>
+                <ShareNetwork rel="nofollow" network="telegram" :url="url" :title="post[0].postTitle" aria-label="telegram" class="st-custom-button"><span><i class="fab fa-telegram"></i></span></ShareNetwork>
             </div>
         </div>
         <div v-if="$store.state.isAdmin" class="admin-opt">

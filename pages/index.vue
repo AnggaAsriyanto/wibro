@@ -30,7 +30,7 @@ export default {
   name: 'IndexPage',
   head() {
     return {
-      title: 'Info Anime Terupdate | Wibro',
+      title: 'Berita & Info Anime Terbaru Indonesia | Wibro',
       link: [
         { rel: "canonical", href: "https://wibro.site/" }
       ]

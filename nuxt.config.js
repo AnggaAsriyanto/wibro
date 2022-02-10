@@ -104,7 +104,6 @@ export default {
         messaging: true,
         performance: true,
         analytics: true,
-        remoteConfig: true
       }
     }], [
       '@nuxtjs/pwa', {

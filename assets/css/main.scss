@@ -265,10 +265,12 @@ form.admin {
 		}
 
 		iframe {
-			min-height: 200px;
+			min-height: 50vw;
 			width: 100%;
 			background-color: #c4c4c4;
 			@media (min-width: 550px) {
+				min-height: 180px;
+				height: 16vw;
 				width: 50%;
 			}
 		}
@@ -299,6 +301,7 @@ form.admin {
 			transform: translateX(0);
 			transition: 1s ease;
 			padding: 0;
+			z-index: 800;
 		}
 		small {
 			@media (min-width: 550px) {
