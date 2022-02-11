@@ -9,14 +9,12 @@
 
         <div class="link">
             <div class="quick-link">
-				<client-only>
-					<ul>
-						<li><nuxt-link to="/">Home</nuxt-link></li>
-						<li><nuxt-link :to="{ name: 'about' }">About</nuxt-link></li>
-						<li><nuxt-link :to="{ name: 'contact' }">Contact</nuxt-link></li>
-						<li v-if="$store.state.profileUsername"><nuxt-link :to="{ name: 'admin' }">Admin</nuxt-link></li>
-					</ul>
-				</client-only>
+				<ul>
+					<li><nuxt-link to="/">Home</nuxt-link></li>
+					<li><nuxt-link :to="{ name: 'about' }">About</nuxt-link></li>
+					<li><nuxt-link :to="{ name: 'contact' }">Contact</nuxt-link></li>
+					<li v-if="$store.state.profileUsername"><nuxt-link :to="{ name: 'admin' }">Admin</nuxt-link></li>
+				</ul>
             </div>
         
             <div class="social-media">

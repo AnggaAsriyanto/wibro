@@ -11,7 +11,9 @@
               <div class="category">
                 <NuxtLink :class="post.postCategory" to="/">{{ post.postCategory}}</NuxtLink>
               </div>
-              <h1>{{ post.postTitle }}</h1>
+			  <nuxt-link
+			  :to="{ name: 'posts-id-title', params: { title: post.postTitle.replace(/\s+/g, '-').toLowerCase(), id: post.postId } }"
+			  ><h1>{{ post.postTitle }}</h1></nuxt-link>
               <div class="detail-info">
                   <small><span><i class="fas fa-clock"></i></span>{{ new Date(post.postDate).toLocaleString("id", { dateStyle: "long"}) }}</small>
                   <small><span><i class="fas fa-book-open"></i></span>{{ post.postTimeRead }} menit</small>
@@ -62,10 +64,19 @@ export default {
 			margin-bottom: .5rem;
 		}
 	}
+	a {
+		text-decoration: none;
+	}
 	h1 {
 		font-size: 1.2rem;
 		line-height: 1.60rem;
 		color: rgb(43, 43, 43);
+		&:hover {
+			color: #4ab7ff;
+		}
+		&:active {
+			color: #4ab7ff;
+		}
         @media (min-width: 550px) {
             font-size: 1rem;
 			line-height: 1.5rem;

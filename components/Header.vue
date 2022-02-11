@@ -50,30 +50,28 @@
 		</nav>
 
 		<div :class="{ 'bar': true, 'show': $store.state.isBar }">
-			<client-only>
-				<div class="bar-menu">
-					<div class="brand-cont">
-						<div class="img-cont">
-							<img src="../static/wibro.svg" alt="wibro">
-						</div>
-						<button @click="toggleBar" class="toggle-bar">
-							<span><i class="fas fa-times"></i></span>
-						</button>
+			<div class="bar-menu">
+				<div class="brand-cont">
+					<div class="img-cont">
+						<img src="../static/wibro.svg" alt="wibro">
 					</div>
-					<div>
-						<nuxt-link @click.native="toggleBar" to="/">Home</nuxt-link>
-					</div>
-					<div>
-						<nuxt-link @click.native="toggleBar" :to="{ name: 'about' }">About</nuxt-link>
-					</div>
-					<div>
-						<nuxt-link @click.native="toggleBar" :to="{ name: 'contact' }">Contact</nuxt-link>
-					</div>
-					<div v-if="$store.state.profileUsername">
-						<nuxt-link @click.native="toggleBar" :to="{ name: 'admin' }">Admin</nuxt-link>
-					</div>
+					<button @click="toggleBar" class="toggle-bar">
+						<span><i class="fas fa-times"></i></span>
+					</button>
 				</div>
-			</client-only>
+				<div>
+					<nuxt-link @click.native="toggleBar" to="/">Home</nuxt-link>
+				</div>
+				<div>
+					<nuxt-link @click.native="toggleBar" :to="{ name: 'about' }">About</nuxt-link>
+				</div>
+				<div>
+					<nuxt-link @click.native="toggleBar" :to="{ name: 'contact' }">Contact</nuxt-link>
+				</div>
+				<div v-if="$store.state.profileUsername">
+					<nuxt-link @click.native="toggleBar" :to="{ name: 'admin' }">Admin</nuxt-link>
+				</div>
+			</div>
 		</div>
 	</header>
 </template>

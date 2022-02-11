@@ -1,15 +1,12 @@
 <template>
   <fragment>
-    <client-only>
-      <div class="post-card-list">
-          <nuxt-link
+      <div v-show="this.postsLists" class="post-card-list">
+          <div
           v-for="(post, idx) in this.postsLists" 
-          :key="idx"
-          :to="{ name: 'posts-id-title', params: { title: post.postTitle.replace(/\s+/g, '-').toLowerCase(), id: post.postId } }">
-              <PostCard v-show="post" :post="post" />
-          </nuxt-link>
+          :key="idx">
+              <PostCard :post="post" />
+          </div>
       </div>
-    </client-only>
     <!-- <InFeedAdsense
         v-if="mobile"
         data-ad-format="fluid"

@@ -23,7 +23,10 @@ export default {
   layout: 'cwn',
   head() {
     return {
-      title: 'About | Wibro'
+      title: 'About | Wibro',
+      link: [
+        { rel: "canonical", href: "https://wibro.site/about"}
+      ]
     }
   }
 }
