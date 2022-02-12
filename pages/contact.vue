@@ -5,13 +5,13 @@
       <p>Punya beberapa pertanyaan kritik atau saran, Hubungi kami via berikut</p>
       <div class="contact-info">
         <div class="mail">
-          <a href="mailto:wibroidn@gmail.com"><span><i class="fas fa-envelope"></i></span></a>
+          <a href="mailto:wibroidn@gmail.com" aria-label="email"><span><i class="fas fa-envelope"></i></span></a>
           <p>wibroidn@gmail.com</p>
         </div>  
         <div class="social-media">
-          <a href="#"><span><i class="fab fa-facebook"></i></span></a>
-          <a href="#"><span><i class="fab fa-instagram"></i></span></a>
-          <a href="#"><span><i class="fab fa-twitter"></i></span></a>
+          <a href="https://discord.gg/Uyr8Ms4auS" target="_blank" rel="noreferrer" aria-label="discord-msg"><span><i class="fab fa-discord"></i></span></a>
+          <a href="https://www.instagram.com/bang_wibro/" target="_blank" rel="noreferrer" aria-label="instagram-msg"><span><i class="fab fa-instagram"></i></span></a>
+          <a href="https://twitter.com/bangwibro" target="_blank" rel="noreferrer" aria-label="twitter-msg"><span><i class="fab fa-twitter"></i></span></a>
         </div>
       </div>
     </div>
@@ -22,7 +22,10 @@ export default {
   layout: 'cwn',
   head() {
     return {
-      title: 'Contact | Wibro'
+      title: 'Contact | Wibro',
+      link: [
+        { rel: "canonical", href: "https://wibro.site/contact"}
+      ]
     }
   }
 }
