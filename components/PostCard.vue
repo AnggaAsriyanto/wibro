@@ -9,7 +9,7 @@
       <div class="info-post">
           <article>
               <div class="category">
-                <NuxtLink :class="post.postCategory" to="/">{{ post.postCategory}}</NuxtLink>
+                <NuxtLink :class="post.postCategory" :to="{ name: 'category-name-idx', params: { name: post.postCategory, idx: '1'}}">{{ post.postCategory}}</NuxtLink>
               </div>
 			  <nuxt-link
 			  :to="{ name: 'posts-id-title', params: { title: post.postTitle.replace(/\s+/g, '-').toLowerCase(), id: post.postId } }"
@@ -72,9 +72,6 @@ export default {
 		line-height: 1.60rem;
 		color: rgb(43, 43, 43);
 		&:hover {
-			color: #4ab7ff;
-		}
-		&:active {
 			color: #4ab7ff;
 		}
         @media (min-width: 550px) {

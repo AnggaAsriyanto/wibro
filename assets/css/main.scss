@@ -60,6 +60,26 @@
     }
 }
 
+.paginations {
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0 1rem;
+    .item-page {
+        background-color: transparent;
+        font-family: inherit;
+        padding: .5rem 1rem;
+        border: 1px solid #dfdfdf;
+        cursor: pointer;
+        text-decoration: none;
+    }
+    .item-page.link {
+        color: #000;
+    }
+    .item-page.link.nuxt-link-active {
+        color: #1fb8e6;
+    }
+}
+
 .post-card-list {
     width: 100%;
     padding-bottom: 1rem;
@@ -89,14 +109,29 @@
 	a.news {
 		border: 1px solid rgb(0, 132, 255);
 		color: rgb(0, 132, 255);
+		&:hover {
+			background-color: rgb(0, 132, 255);
+			color: #fff;
+			border: none;
+		}
 	}
 	a.chart {
 		border: 1px solid #e4ad16;
     	color: #e4ad16;
+		&:hover {
+			background-color: #e4ad16;
+			color: #fff;
+			border: none;
+		}
 	}
 	a.review {
 		border: 1px solid #13ccad;
     	color: #13ccad;
+		&:hover {
+			background-color: #13ccad;
+			color: #fff;
+			border: none;
+		}
 	}
 }
 
@@ -310,7 +345,8 @@ form.admin {
 		}
 		.social-media {
 			margin-top: 0.5rem;
-			background-color: rgba(0, 0, 0, 0.05);
+			// background-color: rgba(0, 0, 0, 0.05);
+			background-color: #eeeeee;
 			padding: 1rem;
 			border-radius: 10px;
 			display: flex;

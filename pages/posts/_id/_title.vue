@@ -2,7 +2,7 @@
     <article v-show="this.post" class="post-article" lang="id" itemscope itemtype="https://schema.org/Article">
         <Conf v-show="isConf" :cancle="cancle" :deletePost="deletePost" :postTitle="post[0].postTitle" />
         <div class="category">
-            <nuxt-link :class="post[0].postCategory" aria-label="category" to="#"><span itemprop="about">{{ post[0].postCategory }}</span></nuxt-link>
+            <nuxt-link :class="post[0].postCategory" aria-label="category" :to="{ name: 'category-name-idx', params: { name: post[0].postCategory, idx: '1'}}"><span itemprop="about">{{ post[0].postCategory }}</span></nuxt-link>
         </div>
         <div class="title">
             <h1 itemprop="name">{{ post[0].postTitle }}</h1>

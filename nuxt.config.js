@@ -130,7 +130,13 @@ export default {
     exclude: ['/admin'],
     routes: [
       'posts/UdMVSdLBHWFIWS5e6CzA/ousama-ranking,-anime-dengan-grafik-sederhana-tapi-cerita-luar-biasa',
-    ]
+      'posts/hy3co5XWryQEXg44XZwg/9-anime-movie-terbaik-yang-wajib-kalian-tonton',
+    ],
+    defaults: {
+      changefreq: 'daily',
+      priority: 1,
+      lastmod: new Date()
+    } 
   },
 
   "nuxt-compress": {
