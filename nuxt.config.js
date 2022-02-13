@@ -136,7 +136,7 @@ export default {
       '/create-post'
     ],
     routes: [
-      'posts/ousama-ranking,-anime-dengan-grafik-sederhana-tapi-cerita-luar-biasa',
+      'posts/ousama-ranking-anime-dengan-grafik-sederhana-tapi-cerita-luar-biasa',
       'posts/9-anime-movie-terbaik-yang-wajib-kalian-tonton',
     ],
     defaults: {
