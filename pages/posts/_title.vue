@@ -2,14 +2,14 @@
     <article v-show="this.post" class="post-article" lang="id" itemscope itemtype="https://schema.org/Article">
         <Conf v-show="isConf" :cancle="cancle" :deletePost="deletePost" :postTitle="post[0].postTitle" />
         <div class="category">
-            <nuxt-link :class="post[0].postCategory" aria-label="category" :to="{ name: 'category-name-idx', params: { name: post[0].postCategory, idx: '1'}}"><span itemprop="about">{{ post[0].postCategory }}</span></nuxt-link>
+            <nuxt-link :class="post[0].postCategory" aria-label="category" :to="{ name: 'posts-category-name-idx', params: { name: post[0].postCategory, idx: '1'}}"><span itemprop="about">{{ post[0].postCategory }}</span></nuxt-link>
         </div>
         <div class="title">
             <h1 itemprop="name">{{ post[0].postTitle }}</h1>
         </div>
         <div class="info">
             <small>Published by <span itemprop="author">{{ post[0].postAuthor }}</span></small>
-            <small itemprop="datePublished">{{ new Date(post[0].postDate).toLocaleString("id", { dateStyle: "long"}) }}</small>
+            <small itemprop="datePublished">{{ date }}</small>
         </div>
         <div class="img-container">
             <nuxt-img itemprop="image" format="webp" sizes="xl:100vw lg:100vw md:100vw sm:100vw xs:100vw" :src="post[0].postCoverImage" :alt="post[0].postCoverImageName"  />
@@ -83,10 +83,19 @@ export default {
             loading: true,
         }
     },
-    async asyncData({ params, store }) {
-        const post = store.state.posts.filter((post) => {
-            return post.postId === params.id
+    async asyncData({ params, store, error }) {
+        const paramsTitle = params.title.replace(/-/g, ' ')
+
+        const post = await store.state.posts.filter((post) => {
+            let postTitle = post.postTitle.replace(/,/g, '').toLowerCase()
+            return postTitle === paramsTitle
         })
+
+        if(post.length === 0) {
+            error({
+                statusCode: 404
+            })
+        }
 
         return { post }
     },
@@ -131,6 +140,9 @@ export default {
             const tags = this.post[0].postTags
             return tags.split(',')
         },
+        date() {
+            return new Date(this.post[0].postDate).toLocaleString("id", { dateStyle: "long"})
+        }
     }
 }
 </script>

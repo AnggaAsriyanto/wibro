@@ -42,7 +42,7 @@ export default {
                 { rel: "canonical", href: "https://wibro.site/users/login" }
             ],
             meta: [
-                { hid: "description", name: "description", content: "wibro login, mesuk kembali ke wibro"}
+                { hid: "description", name: "description", content: "wibro login, Masuk Kembali ke Wibro"}
             ]
         }
     },

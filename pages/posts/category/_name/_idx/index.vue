@@ -22,13 +22,13 @@
     </div>
     <div v-show="this.posts" class="paginations">
         <button @click="back" :disabled="isFirst" class="item-page">Back</button>
-        <nuxt-link v-if="!isFirst" :to="{ name: 'category-name-idx', params: { name: this.$route.params.name, idx: idx - 1 }}" class="item-page link">
+        <nuxt-link v-if="!isFirst" :to="{ name: linkName, params: { name: this.$route.params.name, idx: idx - 1 }}" class="item-page link">
             {{ idx - 1 }}
         </nuxt-link>
-        <nuxt-link :to="{ name: 'category-name-idx', params: { name: this.$route.params.name, idx: idx }}" class="item-page link">
+        <nuxt-link :to="{ name: linkName, params: { name: this.$route.params.name, idx: idx }}" class="item-page link">
             {{ idx }}
         </nuxt-link>
-        <nuxt-link v-if="!isLast" :to="{ name: 'category-name-idx', params: { name: this.$route.params.name, idx: idx + 1 }}" class="item-page link">
+        <nuxt-link v-if="!isLast" :to="{ name: linkName, params: { name: this.$route.params.name, idx: idx + 1 }}" class="item-page link">
             {{ idx + 1 }}
         </nuxt-link>
         <button @click="next" :disabled="isLast" class="item-page">Next</button>
@@ -49,17 +49,21 @@ export default {
       ]
     }
   },
+  data() {
+    return {
+      linkName: 'posts-category-name-idx'
+    }
+  },
   async asyncData({params, store, error}) {
     let posts = []
 
-    store.state.posts.forEach(post => {
+    await store.state.posts.forEach(post => {
       if(post.postCategory === params.name) {
         posts.push(post)
       }
     });
 
     const pageidx = Math.ceil(posts.length / 12)
-    const category = params.name.charAt(0).toUpperCase() + params.name.slice(1)
 
     if(
         posts.length === 0 ||
@@ -72,6 +76,8 @@ export default {
         })
     }
 
+    const category = params.name.charAt(0).toUpperCase() + params.name.slice(1)
+
     let idx = params.idx - 1
     let startIdx = idx * 12
     let endIdx = startIdx + 12
@@ -80,10 +86,10 @@ export default {
   },
   methods: {
     back() {
-        this.$router.push({ name: 'category-name-idx', params: { name: this.$route.params.name, idx: this.idx - 1}})
+        this.$router.push({ name: this.linkName, params: { name: this.$route.params.name, idx: this.idx - 1}})
     },
     next() {
-        this.$router.push({ name: 'category-name-idx', params: { name: this.$route.params.name, idx: this.idx + 1}})
+        this.$router.push({ name: this.linkName, params: { name: this.$route.params.name, idx: this.idx + 1}})
     },
   },
   computed: {

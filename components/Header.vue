@@ -4,7 +4,7 @@
 			<div class="nav-menu">
 				<div class="menu-bar">
 					<button @click="toggleBar" aria-label="toggle" type="button" class="toggle-bar">
-						<i class="fas fa-bars"></i>
+						<span><i class="fas fa-bars"></i></span>
 					</button>
 				</div>
 				<div class="brand">

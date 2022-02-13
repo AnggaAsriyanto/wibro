@@ -9,13 +9,13 @@
       <div class="info-post">
           <article>
               <div class="category">
-                <NuxtLink :class="post.postCategory" :to="{ name: 'category-name-idx', params: { name: post.postCategory, idx: '1'}}">{{ post.postCategory}}</NuxtLink>
+                <NuxtLink :class="post.postCategory" :to="{ name: 'posts-category-name-idx', params: { name: post.postCategory, idx: '1'}}">{{ post.postCategory}}</NuxtLink>
               </div>
 			  <nuxt-link
-			  :to="{ name: 'posts-id-title', params: { title: post.postTitle.replace(/\s+/g, '-').toLowerCase(), id: post.postId } }"
+			  :to="{ name: 'posts-title', params: { title: link } }"
 			  ><h1>{{ post.postTitle }}</h1></nuxt-link>
               <div class="detail-info">
-                  <small><span><i class="fas fa-clock"></i></span>{{ new Date(post.postDate).toLocaleString("id", { dateStyle: "long"}) }}</small>
+                  <small><span><i class="fas fa-clock"></i></span>{{ date }}</small>
                   <small><span><i class="fas fa-book-open"></i></span>{{ post.postTimeRead }} menit</small>
               </div>
           </article>
@@ -25,7 +25,15 @@
 
 <script>
 export default {
-	props: ['post']
+	props: ['post'],
+	computed: {
+		link() {
+			return this.post.postTitle.replace(/\s+/g, '-').replace(/,/g, '').toLowerCase()
+		},
+		date() {
+			return new Date(this.post.postDate).toLocaleString("id", { dateStyle: "long"})
+		}
+	}
 }
 </script>
 

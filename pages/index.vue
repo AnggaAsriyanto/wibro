@@ -40,7 +40,7 @@ export default {
     }
   },
   async asyncData({store}) {
-    const postsLists = store.getters.postsFeeds
+    const postsLists = await store.getters.postsFeeds
 
     return { postsLists }
   },

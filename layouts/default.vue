@@ -29,7 +29,7 @@ export default {
       this.isArticle = false
 
       if(
-        this.$route.name === 'posts-id-title' ||
+        this.$route.name === 'posts-title' ||
         this.$route.name === 'post-preview'
       ) {
         this.isArticle = true

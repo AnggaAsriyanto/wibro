@@ -54,7 +54,7 @@ export default {
         }
     },
     async asyncData({store, params}) {
-        const posts = store.getters.postsIdx(params.idx)
+        const posts = await store.getters.postsIdx(params.idx)
 
         return { posts }
     },
