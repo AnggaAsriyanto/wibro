@@ -14,7 +14,7 @@
         data-ad-client="ca-pub-1142153237520676"
         data-ad-slot="9728959860">
     </InFeedAdsense> -->
-    <div v-show="this.postsLists.length == 9 && !loading" class="more-posts">
+    <div v-if="this.postsLists.length == 9 && !loading" class="more-posts">
        <nuxt-link :to="{ name: 'posts-pages-idx', params: { idx: 1} }">
           <h5>Lihat lebih banyak <span><i class="fas fa-arrow-right"></i></span></h5>
        </nuxt-link>
@@ -27,7 +27,7 @@ export default {
   name: 'IndexPage',
   head() {
     return {
-      title: 'Berita & Info Anime Terbaru Indonesia | Wibro',
+      title: 'Berita & Info Anime Terupdate Indonesia | Wibro',
       link: [
         { rel: "canonical", href: "https://wibro.site/" }
       ]

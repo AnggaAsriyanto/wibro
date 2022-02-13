@@ -52,7 +52,13 @@ export default {
     layout: 'center',
     head() {
         return {
-            title: 'Register | Wibro'
+            title: 'Register | Wibro',
+            link: [
+                { rel: "canonical", href: "https://wibro.site/users/register" }
+            ],
+            meta: [
+                { hid: "description", name: "description", content: "Wibro Register, Bergabung dengan Wibro"}
+            ]
         }
     },
     data() {

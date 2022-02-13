@@ -26,6 +26,9 @@ export default {
       title: 'About | Wibro',
       link: [
         { rel: "canonical", href: "https://wibro.site/about"}
+      ],
+      meta: [
+          { hid: "description", name: "description", content: "Ringkasan Situs Wibro, Tentang Wibro"}
       ]
     }
   }

@@ -31,6 +31,14 @@
 
 <script>
 export default {
+    head() {
+        return {
+            title: "Post Preview | Wibro",
+            meta: [
+                { hid: "description", name: "description", content: "preview content untuk dipublish di wibro"}
+            ]
+        }
+    },
     computed: {
         postCategory() {
             return this.$store.state.postCategory

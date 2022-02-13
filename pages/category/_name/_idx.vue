@@ -38,6 +38,17 @@
 
 <script>
 export default {
+  head() {
+    return {
+      title: `Anime Category ${this.category} | Wibro`,
+      link: [
+        { rel: "canonical", href: `https://wibro.site/${this.$route.params.name}/${this.$route.params.idx}`}
+      ],
+      meta: [
+        { hid: "description", name: "description", content: `Daftar Anime Category ${this.$route.params.name}, Jelajahi Category Posts Wibro`}
+      ]
+    }
+  },
   async asyncData({params, store, error}) {
     let posts = []
 
@@ -48,6 +59,7 @@ export default {
     });
 
     const pageidx = Math.ceil(posts.length / 12)
+    const category = params.name.charAt(0).toUpperCase() + params.name.slice(1)
 
     if(
         posts.length === 0 ||
@@ -64,7 +76,7 @@ export default {
     let startIdx = idx * 12
     let endIdx = startIdx + 12
 
-    return { posts, startIdx, endIdx }
+    return { posts, startIdx, endIdx, category }
   },
   methods: {
     back() {

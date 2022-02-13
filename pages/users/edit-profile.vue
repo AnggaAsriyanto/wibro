@@ -26,7 +26,12 @@ export default {
     layout: 'center',
     head() {
         return {
-            title: 'Edit Profile | Wibro'
+            title: 'Edit Profile | Wibro',
+            meta: [
+                { name: "robots", content: "noindex" },
+                { name: "googlebot", content: "noindex" },
+                { hid: "description", name: "description", content: "wibro edit title"}
+            ]
         }
     },
     data() {

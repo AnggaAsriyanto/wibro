@@ -26,6 +26,17 @@
 
 <script>
 export default {
+    head() {
+        return {
+            title: `Pages Post ${this.$route.params.idx} | Wibro`,
+            link: [
+                { rel: "canonical", href: `https://wibro.site/posts/pages/${this.$route.params.idx}`}
+            ],
+            meta: [
+                { hid: "description", name: "description", content: "Lihat Posts Lebih Banyak! di Wibro"}
+            ],
+        }
+    },
     data() {
         return {
             loading: true,

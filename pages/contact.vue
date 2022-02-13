@@ -25,6 +25,9 @@ export default {
       title: 'Contact | Wibro',
       link: [
         { rel: "canonical", href: "https://wibro.site/contact"}
+      ],
+      meta: [
+          { hid: "description", name: "description", content: "Contact Wibro, Cara Menghubungi Wibro"}
       ]
     }
   }

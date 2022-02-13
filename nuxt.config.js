@@ -10,7 +10,7 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'Wibro Situs Berita dan Info Anime terbaru di Indonesia, berfokus membahas anime dan jejepangan, Blog Anime Indonesia' },
+      { hid: 'description', name: 'description', content: 'Wibro Situs Berita dan Info Anime terupdate di Indonesia, berfokus membahas anime dan jejepangan, Blog Anime Indonesia' },
       { name: 'format-detection', content: 'telephone=no' },
       { name: 'author', content: 'Angga Asriyanto'}
     ],
@@ -120,13 +120,21 @@ export default {
 
   robots: {
     UserAgent: '*',
-    Disallow: '/admin',
+    Disallow: [
+      '/admin',
+      '/post-preview',
+      '/create-post'
+    ],
   },
 
   sitemap: {
     hostname: 'https://wibro.site/',
     gzip: true,
-    exclude: ['/admin'],
+    exclude: [
+      '/admin',
+      '/post-preview',
+      '/create-post'
+    ],
     routes: [
       'posts/UdMVSdLBHWFIWS5e6CzA/ousama-ranking,-anime-dengan-grafik-sederhana-tapi-cerita-luar-biasa',
       'posts/hy3co5XWryQEXg44XZwg/9-anime-movie-terbaik-yang-wajib-kalian-tonton',

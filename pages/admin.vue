@@ -18,7 +18,10 @@ export default {
     layout: 'center',
     head() {
         return {
-            title: 'Admin | Wibro'
+            title: 'Admin | Wibro',
+            meta: [
+                { hid: "description", name: "description", content: "Admin code verified untuk situs wibro"}
+            ]
         }
     },
     data() {

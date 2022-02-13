@@ -37,7 +37,13 @@ export default {
     layout: 'center',
     head() {
         return {
-            title: 'Login | Wibro'
+            title: 'Login | Wibro',
+            link: [
+                { rel: "canonical", href: "https://wibro.site/users/login" }
+            ],
+            meta: [
+                { hid: "description", name: "description", content: "wibro login, mesuk kembali ke wibro"}
+            ]
         }
     },
     data() {
