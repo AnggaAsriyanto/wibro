@@ -98,39 +98,67 @@
 		color: #fff;
 		padding: 2px 8px;
 		border-radius: 5px;
-		font-weight: 400;
+		font-weight: 500;
 		font-size: 0.7rem;
 		letter-spacing: 1px;
 		text-transform: uppercase;
+		border: 1.3px solid #000;
         @media (min-width: 550px) {
             font-size: 0.55rem;
         }
-	}
-	a.news {
-		border: 1px solid rgb(0, 132, 255);
-		color: rgb(0, 132, 255);
-		&:hover {
-			background-color: rgb(0, 132, 255);
-			color: #fff;
-			border: none;
+		&.news {
+			border-color: rgb(15, 138, 253);
+			color: rgb(15, 138, 253);
+			&:hover {
+				background-color: rgb(15, 138, 253);
+				color: #fff;
+				border: none;
+			}
 		}
-	}
-	a.chart {
-		border: 1px solid #e4ad16;
-    	color: #e4ad16;
-		&:hover {
-			background-color: #e4ad16;
-			color: #fff;
-			border: none;
+		&.chart {
+			border-color: #ffbc04;
+			color: #ffbc04;
+			&:hover {
+				background-color: #ffbc04;
+				color: #fff;
+				border: none;
+			}
 		}
-	}
-	a.review {
-		border: 1px solid #13ccad;
-    	color: #13ccad;
-		&:hover {
-			background-color: #13ccad;
-			color: #fff;
-			border: none;
+		&.review {
+			border-color: #13ccad;
+			color: #13ccad;
+			&:hover {
+				background-color: #13ccad;
+				color: #fff;
+				border: none;
+			}
+		}
+		&.curious {
+			border-color: #d43391;
+			color: #d43391;
+			&:hover {
+				background-color: #d43391;
+				color: #fff;
+				border: none;
+			}
+		}
+		&.opinion {
+			border-color: #9927e6;
+			color: #9927e6;
+			&:hover {
+				background-color: #9927e6;
+				color: #fff;
+				border: none;
+			}
+		}
+		&.hot18 {
+			border-color: #fc01da;
+			color: #fc01da;
+			&:hover {
+				background-color: #fc01da;
+				color: #fff;
+				border: none;
+			}
 		}
 	}
 }

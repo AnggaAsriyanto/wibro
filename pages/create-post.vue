@@ -27,6 +27,9 @@
                                 <option value="news">news</option>
                                 <option value="chart">chart</option>
                                 <option value="review">review</option>
+								<option value="curious">curious</option>
+								<option value="opinion">opinion</option>
+								<option value="hot18">hot18</option>
                             </select>
                         </div>
                         <div>

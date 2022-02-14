@@ -11,6 +11,15 @@
       <small v-if="this.$route.params.name === 'review'">
         Mereview dan membahas anime secara objectif dan mendalam.
       </small>
+      <small v-if="this.$route.params.name === 'curious'">
+        Mempertanyakan dan menjawab pertanyaan seputar anime!
+      </small>
+      <small v-if="this.$route.params.name === 'opinion'">
+        Pendapat personal penulis tentang suatu topik yang dibahas.
+      </small>
+      <small v-if="this.$route.params.name === 'hot18'">
+        Category khusus 18+ tidak boleh kurang.
+      </small>
     </div>
     <div v-show="this.posts" class="post-card-list">
       <div
@@ -114,17 +123,30 @@ export default {
 .category-title {
   padding: .8rem 1rem;
   margin-bottom: 1rem;
-  width: fit-content;
+  width: 100%;
   border: 1px solid #fff;
   border-radius: 5px;
+  color: #fff;
+  @media (min-width: 550px) {
+    width: fit-content;
+  }
   &.news {
-    border-color: rgb(0, 132, 255)
+    background-color: rgb(15, 138, 253)
   }
   &.chart {
-    border-color: #e4ad16;
+    background-color: #ffbc04;
   }
   &.review {
-    border-color: #13ccad;
+    background-color: #13ccad;
+  }
+  &.curious {
+    background-color: #d43391;
+  }
+  &.opinion {
+    background-color: #9927e6;
+  }
+  &.hot18 {
+    background-color: #fc01da;
   }
   h3 {
     text-transform: uppercase;
