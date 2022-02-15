@@ -56,15 +56,17 @@ export default {
 		max-height: 350px;
 	}
 	.img-post {
-		position: relative;
 		width: 100%;
 		flex: auto;
-		height: 60%;
+		height: 50%;
 	}
 	.img-container {
 		width: 100%;
 		height: 100%;
 		background-color: beige;
+		img {
+			object-fit: cover;
+		}
 	}
 	.category {
 		margin-bottom: .7rem;
@@ -104,8 +106,11 @@ export default {
 	}
 	.info-post {
 		width: 100%;
-		height: max-content;
+		height: fit-content;
 		padding: 0.8rem;
+		article {
+			height: max-content;
+		}
 	}
 	.detail-info {
 		display: flex;
