@@ -60,7 +60,29 @@
 					</button>
 				</div>
 				<div>
-					<nuxt-link @click.native="toggleBar" to="/">Home</nuxt-link>
+					<details>
+						<summary @click="listCategory">Category <span v-if="!clickList">+</span><span v-else>-</span></summary>
+						<ul>
+							<li>
+								<nuxt-link v-if="hasCategory('news')" @click.native="toggleBar" class="news" :to="{ name: 'posts-category-name-idx', params: { name: 'news', idx: '1'}}">News</nuxt-link>
+							</li>
+							<li>
+								<nuxt-link v-if="hasCategory('chart')" @click.native="toggleBar" class="chart" :to="{ name: 'posts-category-name-idx', params: { name: 'chart', idx: '1'}}">Chart</nuxt-link>
+							</li>
+							<li>
+								<nuxt-link v-if="hasCategory('review')" @click.native="toggleBar" class="review" :to="{ name: 'posts-category-name-idx', params: { name: 'review', idx: '1'}}">Review</nuxt-link>
+							</li>
+							<li>
+								<nuxt-link v-if="hasCategory('curious')" @click.native="toggleBar" class="curious" :to="{ name: 'posts-category-name-idx', params: { name: 'curious', idx: '1'}}">Curious</nuxt-link>
+							</li>
+							<li>
+								<nuxt-link v-if="hasCategory('opinion')" @click.native="toggleBar" class="opinion" :to="{ name: 'posts-category-name-idx', params: { name: 'opinion', idx: '1'}}">Opinion</nuxt-link>
+							</li>
+							<li>
+								<nuxt-link v-if="hasCategory('hot18')" @click.native="toggleBar" class="hot18" :to="{ name: 'posts-category-name-idx', params: { name: 'hot18', idx: '1'}}">Hot18</nuxt-link>
+							</li>
+						</ul>
+					</details>
 				</div>
 				<div>
 					<nuxt-link @click.native="toggleBar" :to="{ name: 'about' }">About</nuxt-link>
@@ -82,17 +104,27 @@ export default {
         return {
             bar: null,
             infoUser: null,
+			clickList: null,
         }
     },
 	computed: {
 		username() {
 			return this.$store.state.profileUsername
-		}
+		},
 	},
     methods: {
         toggleBar() {
 			this.$store.commit("toggleBar")
         },
+
+		hasCategory(category) {
+			const posts = this.$store.state.posts.some((post) => post.postCategory === category)
+			return posts;
+		},
+
+		listCategory() {
+			this.clickList = !this.clickList
+		},
 
         showUser() {
             this.$store.commit("toggleInfoUser")
@@ -249,6 +281,65 @@ nav {
 					height: 100%;
 					width: 100%;
 					object-fit: cover;
+				}
+			}
+		}
+		details {
+			>summary {
+				color: inherit;
+				font-weight: 700;
+				list-style: none;
+				cursor: pointer;
+				span {
+					margin-left: .5rem;
+					color: #686868;
+				}
+			}
+			ul {
+				margin-top: .5rem;
+				li {
+					margin: .8rem 0;
+					list-style: none;
+					a {
+						font-weight: 500;
+						font-size: .8rem;
+						&.news {
+							&:hover {
+								color: rgb(15, 138, 253);
+								text-decoration: underline;
+							}
+						}
+						&.chart {
+							&:hover {
+								color: #ffbc04;
+								text-decoration: underline;
+							}
+						}
+						&.review {
+							&:hover {
+								color: #13ccad;
+								text-decoration: underline;
+							}
+						}
+						&.curious {
+							&:hover {
+								color: #d43391;
+								text-decoration: underline;
+							}
+						}
+						&.opinion {
+							&:hover {
+								color: #9927e6;
+								text-decoration: underline;
+							}
+						}
+						&.hot18 {
+							&:hover {
+								color: #fc01da;
+								text-decoration: underline;
+							}
+						}
+					}
 				}
 			}
 		}

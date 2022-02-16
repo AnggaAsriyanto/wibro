@@ -83,18 +83,28 @@ export default {
             loading: true,
         }
     },
-    async asyncData({ params, store, error }) {
+    async asyncData({ params, store, error, redirect }) {
         const paramsTitle = params.title.replace(/-/g, ' ')
 
         const post = await store.state.posts.filter((post) => {
             let postTitle = post.postTitle.replace(/,/g, '').toLowerCase()
-            return postTitle === paramsTitle
+            return postTitle.includes(paramsTitle)
         })
 
         if(post.length === 0) {
-            error({
+            await error({
                 statusCode: 404
             })
+
+            return;
+        }
+
+        const titleDash = post[0].postTitle.replace(/,/g, '').replace(/\s+/g, '-').toLowerCase()
+  
+        if(params.title !== titleDash) {
+            await redirect({ name: 'posts-title', params: { title: titleDash}})
+
+            return;
         }
 
         return { post }
