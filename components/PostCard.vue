@@ -8,7 +8,7 @@
 			  class="new-tab"
 			  target="_blank"
 			  :to="{ name: 'posts-title', params: { title: link } }"
-			  >Baca di tab baru</nuxt-link>
+			  ><span><i class="fas fa-share"></i></span></nuxt-link>
           </div>
       </div>
       <div class="info-post">
@@ -79,14 +79,19 @@ export default {
 		transition: .3s ease;
 		.new-tab {
 			position: absolute;
-			top: 50%;
-			left: 50%;
-			transform: translate(-50%, -50%);
+			left: 5%;
+			bottom: 6%;
+			border-radius: 50%;
 			color: #ffffff;
 			width: max-content;
+			width: 2.2rem;
+			height: 2.2rem;
+			display: flex;
+			align-items: center;
+			justify-content: center;
 			padding: .5rem 1rem;
-			border: 2px solid #ffffff;
-			font-size: .8rem;
+			border: 1.5px solid #ffffff;
+			font-size: .9rem;
 			opacity: 0;
 		}
 		&:hover, &:active {
@@ -94,7 +99,7 @@ export default {
 			height: 108%;
 			transition: .3s ease-out;
 			.new-tab {
-				opacity: 1;
+				opacity: 0.9;
 			}
 			&::before {
 				content: '';

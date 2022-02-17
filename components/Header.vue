@@ -301,7 +301,7 @@ nav {
 			ul {
 				margin-top: .5rem;
 				li {
-					margin: .8rem 0;
+					margin: 1rem 0;
 					list-style: none;
 					a {
 						font-weight: 500;
