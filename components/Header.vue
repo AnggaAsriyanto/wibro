@@ -173,7 +173,7 @@ nav {
 		top: 50%;
 		left: 50%;
 		transform: translate(-50%, -50%);
-		height: 8vh;
+		height: 2.7rem;
 		display: flex;
 		align-items: center;
 		a {
@@ -188,12 +188,12 @@ nav {
 	}
 	.user-cont {
 		position: relative;
-		width: 22px;
-		height: 22px;
+		width: 1.25rem;
+		height: 1.25rem;
 	}
 	.user {
-		width: 22px;
-		height: 22px;
+		width: 100%;
+		height: 100%;
 		border-radius: 50%;
 		background-color: #c5c5c5;
 		cursor: pointer;
@@ -215,7 +215,7 @@ nav {
 		text-align: center;
 		border-radius: 10px;
 		background-color: #fff;
-		border: 1px solid #dfdfdf
+		border: 1px solid #dfdfdf;
 	}
 	.option {
 		>div {
@@ -268,15 +268,18 @@ nav {
 		>div {
 			width: 100%;
 			padding: 1.5rem 1rem 1rem;
+			border-bottom: 1px solid #f0f0f0;
 		}
 		.brand-cont {
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
 			padding: 1rem 1rem;
-			border-bottom: 1px solid #dfdfdf;
+			border-bottom: 1px solid #e7e7e7;
 			.img-cont {
 				width: 30px;
+				display: flex;
+				align-items: flex-end;
 				img {
 					height: 100%;
 					width: 100%;

@@ -4,6 +4,11 @@
           <div class="img-container">
               <nuxt-img v-if="post.postCoverImage" loading="lazy" format="webp" sizes="xl:100vw lg:100vw md:100vw sm:100vw xs:100vw" :src="post.postCoverImage" :alt="post.postCoverImageName"/>
 			  <ImageLoad v-else />
+			  <nuxt-link
+			  class="new-tab"
+			  target="_blank"
+			  :to="{ name: 'posts-title', params: { title: link } }"
+			  >Baca di tab baru</nuxt-link>
           </div>
       </div>
       <div class="info-post">
@@ -15,8 +20,8 @@
 			  :to="{ name: 'posts-title', params: { title: link } }"
 			  ><h1>{{ post.postTitle }}</h1></nuxt-link>
               <div class="detail-info">
-                  <small><span><i class="fas fa-clock"></i></span>{{ date }}</small>
-                  <small><span><i class="fas fa-book-open"></i></span>{{ post.postTimeRead }} menit</small>
+                  <small><span><i class="fas fa-calendar-check"></i></span>{{ date }}</small>
+                  <small><span><i class="fas fa-clock"></i></span>{{ post.postTimeRead }} menit</small>
               </div>
           </article>
       </div>
@@ -42,30 +47,68 @@ export default {
 	height: 55vh;
 	min-height: 300px;
 	max-height: 400px;
+	margin: .3rem 1.2rem;
 	background-color: #ffffff;
+	border-radius: 0 0 5px 5px;
 	display: flex;
 	flex-direction: column;
-	border-radius: 0 0 5px 5px;
 	overflow: hidden;
 	cursor: pointer;
-	box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+	box-shadow: 0 0 6.5px .1px rgba(0, 0, 0, 0.1);
     @media (max-width: 350px) {
 	    height: 60vh;
 	}
 	@media (min-width: 550px) {
 		max-height: 350px;
+		margin: 0;
 	}
 	.img-post {
+		position: relative;
 		width: 100%;
 		flex: auto;
 		height: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		overflow: hidden;
 	}
 	.img-container {
 		width: 100%;
 		height: 100%;
 		background-color: beige;
+		transition: .3s ease;
+		.new-tab {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			color: #ffffff;
+			width: max-content;
+			padding: .5rem 1rem;
+			border: 2px solid #ffffff;
+			font-size: .8rem;
+			opacity: 0;
+		}
+		&:hover, &:active {
+			width: 108%;
+			height: 108%;
+			transition: .3s ease-out;
+			.new-tab {
+				opacity: 1;
+			}
+			&::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background-color: rgba(0, 0, 0, 0.2);
+			}
+		}
 		img {
 			object-fit: cover;
+			object-position: center center;
 		}
 	}
 	.category {
