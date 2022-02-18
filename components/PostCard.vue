@@ -54,13 +54,14 @@ export default {
 	flex-direction: column;
 	overflow: hidden;
 	cursor: pointer;
-	box-shadow: 0 0 6.5px .1px rgba(0, 0, 0, 0.1);
+	box-shadow: 0 0 6.5px .1px #e0e0e0;
     @media (max-width: 350px) {
 	    height: 60vh;
 	}
 	@media (min-width: 550px) {
 		max-height: 350px;
 		margin: 0;
+		box-shadow: 0 0 6.5px .1px #ececec;
 	}
 	.img-post {
 		position: relative;

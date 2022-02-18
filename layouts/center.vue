@@ -4,9 +4,11 @@
         <nav>
             <div class="nav-menu">
                 <div class="brand">
-                    <nuxt-link to="/">
+                  <div class="brand-cont">
+                     <nuxt-link to="/">
                       <img src="../static/wibro.svg" alt="wibro logo">
                     </nuxt-link>
+                  </div>
                 </div>
             </div>
         </nav>

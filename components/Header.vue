@@ -8,43 +8,22 @@
 					</button>
 				</div>
 				<div class="brand">
-					<nuxt-link to="/">
-						<img src="../static/wibro.svg" alt="wibro logo">
-					</nuxt-link>
+					<div :class="{'brand-cont': true, 'hide': this.$store.state.isSearching}">
+						<nuxt-link to="/">
+							<img src="../static/wibro.svg" alt="wibro logo">
+						</nuxt-link>
+					</div>
+					<div :class="{'show': this.$store.state.isSearching}">
+						<form @submit.prevent="handleSubmit">
+							<input v-model="searchValue" ref="search" type="search" name="search" id="search" maxlength="20" placeholder="Search..">
+						</form>
+					</div>
 				</div>
-				<div class="user-cont">
-					<div @click="showUser" class="user">
-						<img loading="lazy" v-if="$store.state.profilePhoto" :src="$store.state.profilePhoto" :alt="$store.state.profilePhotoName">
-						<img v-else src="../static/user.svg" alt="user">
-					</div>
-					<div v-if="$store.state.isInfoUser" class="info-user">
-						<div v-if="!$store.state.profileUsername" class="option">
-							<div>
-								<nuxt-link @click.native="showUser" :to="{ name: 'users-login' }">Login</nuxt-link>
-							</div>
-							<hr>
-							<div>
-								<nuxt-link @click.native="showUser" :to="{ name: 'users-register' }">Daftar</nuxt-link>
-							</div>
-						</div>
-						<div v-if="$store.state.profileUsername" class="option">
-							<div v-if="username">
-								<p>{{ username }}</p>
-							</div>
-							<hr v-if="username">
-							<div>
-								<nuxt-link @click.native="showUser" :to="{ name: 'users-edit-profile' }">Edit Profile</nuxt-link>
-							</div>
-							<hr>
-							<div v-if="$store.state.isAdmin">
-								<nuxt-link @click.native="showUser" :to="{ name: 'create-post' }">Create Post</nuxt-link>
-							</div>
-							<hr v-if="$store.state.isAdmin">
-							<div>
-								<button @click="logOut" class="logout">Logout</button>
-							</div>
-						</div>
-					</div>
+				<div class="search">
+					<button @click="isSearching" aria-label="search" type="button" class="search-btn">
+						<span v-if="!this.$store.state.isSearching"><i class="fas fa-search"></i></span>
+						<span v-else><i class="fas fa-times"></i></span>
+					</button>
 				</div>
 			</div>
 		</nav>
@@ -58,6 +37,10 @@
 					<button @click="toggleBar" class="toggle-bar">
 						<span><i class="fas fa-times"></i></span>
 					</button>
+				</div>
+				<div>
+					<nuxt-link v-if="!$store.state.profileUsername" @click.native="toggleBar" :to="{ name: 'users-login' }">Login / Register</nuxt-link>
+					<nuxt-link v-else @click.native="toggleBar" :to="{ name: 'users-profile-username', params: { username: this.$store.state.profileUsername} }">{{ this.$store.state.profileUsername }}</nuxt-link>
 				</div>
 				<div>
 					<details>
@@ -93,6 +76,9 @@
 				<div v-if="$store.state.profileUsername">
 					<nuxt-link @click.native="toggleBar" :to="{ name: 'admin' }">Admin</nuxt-link>
 				</div>
+				<div v-if="$store.state.profileUsername">
+					<button @click="logOut" class="logout">Logout</button>
+				</div>
 			</div>
 		</div>
 	</header>
@@ -103,8 +89,9 @@ export default {
     data() {
         return {
             bar: null,
-            infoUser: null,
 			clickList: null,
+			searching: null,
+			searchValue: '',
         }
     },
 	computed: {
@@ -126,15 +113,25 @@ export default {
 			this.clickList = !this.clickList
 		},
 
-        showUser() {
-            this.$store.commit("toggleInfoUser")
-        },
+		isSearching() {
+			this.searchValue = ''
+			this.$store.commit("toggleSearch")
+			if(this.$store.state.isSearching) {
+				setTimeout(() => {
+					this.$refs.search.focus()
+				}, 850);
+			}
+		},
+
+		handleSubmit() {
+			this.$refs.search.blur()
+			this.$router.push({ name: 'posts-search-value-idx', params: { value: this.searchValue, idx: '1'}})
+		},
 
 		async logOut() {
 			await this.$fire.auth.signOut()
 			await this.$store.dispatch('isAnonymous')
 			window.location.reload()
-			this.$store.commit("toggleInfoUser")
 		}
     }
 }
@@ -173,16 +170,41 @@ nav {
 		top: 50%;
 		left: 50%;
 		transform: translate(-50%, -50%);
-		height: 2.7rem;
-		display: flex;
-		align-items: center;
-		a {
+		height: 100%;
+		overflow: hidden;
+		>div {
+			height: 8vh;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			transition: .8s ease;
+			&.show, &.hide {
+				transform: translateY(-100%);
+				transition: .8s ease;
+			}
+		}
+		form {
 			width: max-content;
-			height: 60%;
+			padding: 0;
+			border: none;
+			border-radius: 0;
+		}
+		#search {
+			border-radius: 5px;
+			border: none;
+			background-color: rgba(0, 0, 0, 0.1);
+			padding: .3rem .8rem;
+			font-family: inherit;
+			font-size: .7rem;
+		}
+		a {
+			height: 1.6rem;
+			width: max-content;
 		}
 		img {
-			width: 100%;
 			height: 100%;
+			max-height: 5vh;
+			width: 100%;
 			object-fit: contain;
 		}
 	}
@@ -224,17 +246,6 @@ nav {
 			display: flex;
 			align-items: center;
 			justify-content: center;
-		}
-		.logout {
-			font-family: inherit;
-			background-color: transparent;
-			border: none;
-			font-size: inherit;
-			color: red;
-			cursor: pointer;
-			&:active {
-				opacity: 0;
-			}
 		}
 	}
 	hr {
@@ -349,18 +360,32 @@ nav {
 	}
 }
 
+button {
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+	color: #1d1d1d;
+	&:active {
+		opacity: 0;
+	}
+}
+
 .bar.show {
 	transition: 1s ease;
 	transform: translateX(0);
 }
 
-.toggle-bar {
-	cursor: pointer;
+.logout {
+	font-family: inherit;
 	background-color: transparent;
 	border: none;
+	font-size: inherit;
+	color: red;
+	cursor: pointer;
 	&:active {
 		opacity: 0;
 	}
 }
+
 
 </style>

@@ -1,5 +1,9 @@
 <template>
     <fragment>
+        <div class="page-desc">
+            <small>Page {{ this.idx }} of {{ this.idxPosts }} </small>
+            <small>{{ this.posts.length}} posts</small>
+        </div>
         <div v-show="this.posts" class="post-card-list">
             <div
             v-for="(post, idx) in this.posts" 
@@ -8,19 +12,7 @@
                 <PostCard :post="post" />
             </div>
         </div>
-        <div v-show="this.posts" class="paginations">
-            <button @click="back" :disabled="isFirst" class="item-page">Back</button>
-            <nuxt-link v-if="!isFirst" :to="{ name: 'posts-pages-idx', params: { idx: idx - 1 }}" class="item-page link">
-                {{ idx - 1 }}
-            </nuxt-link>
-            <nuxt-link :to="{ name: 'posts-pages-idx', params: { idx: idx }}" class="item-page link">
-                {{ idx }}
-            </nuxt-link>
-            <nuxt-link v-if="!isLast" :to="{ name: 'posts-pages-idx', params: { idx: idx + 1 }}" class="item-page link">
-                {{ idx + 1 }}
-            </nuxt-link>
-            <button @click="next" :disabled="isLast" class="item-page">Next</button>
-        </div>
+        <Pagination v-show="this.posts" :linkName="linkName" :back="back" :next="next" :isFirst="isFirst" :isLast="isLast" :idx="idx" />
     </fragment>
 </template>
 
@@ -40,6 +32,7 @@ export default {
     data() {
         return {
             loading: true,
+            linkName: 'posts-pages-idx',
         }
     },
     middleware({store, params, redirect}) {
@@ -63,10 +56,10 @@ export default {
     },
     methods: {
         back() {
-            this.$router.push({ name: 'posts-pages-idx', params: { idx: this.idx - 1}})
+            this.$router.push({ name: this.linkName, params: { idx: this.idx - 1}})
         },
         next() {
-            this.$router.push({ name: 'posts-pages-idx', params: { idx: this.idx + 1}})
+            this.$router.push({ name: this.linkName, params: { idx: this.idx + 1}})
         },
     },
     computed: {

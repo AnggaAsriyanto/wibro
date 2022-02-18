@@ -60,6 +60,16 @@
     }
 }
 
+.page-desc {
+    margin: 1rem;
+    color: #a5a5a5;
+    display: flex;
+    justify-content: space-between;
+    @media (min-width: 550px) {
+        margin: 1rem 0;
+    }
+} 
+
 .paginations {
     display: flex;
     justify-content: center;
@@ -78,6 +88,9 @@
     .item-page.link.nuxt-link-active {
         color: #1fb8e6;
     }
+	button[disabled] {
+		color: #cccccc;
+	}
 }
 
 .post-card-list {

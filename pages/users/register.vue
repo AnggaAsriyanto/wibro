@@ -13,6 +13,7 @@
             maxlength="20"
             pattern="[^\s]+"
             title="Username tidak boleh terdapat spasi"
+            autofocus
             required>
         </div>
         <div>

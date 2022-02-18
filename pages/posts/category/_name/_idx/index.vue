@@ -29,19 +29,7 @@
         <PostCard :post="post" />
       </div>
     </div>
-    <div v-show="this.posts" class="paginations">
-        <button @click="back" :disabled="isFirst" class="item-page">Back</button>
-        <nuxt-link v-if="!isFirst" :to="{ name: linkName, params: { name: this.$route.params.name, idx: idx - 1 }}" class="item-page link">
-            {{ idx - 1 }}
-        </nuxt-link>
-        <nuxt-link :to="{ name: linkName, params: { name: this.$route.params.name, idx: idx }}" class="item-page link">
-            {{ idx }}
-        </nuxt-link>
-        <nuxt-link v-if="!isLast" :to="{ name: linkName, params: { name: this.$route.params.name, idx: idx + 1 }}" class="item-page link">
-            {{ idx + 1 }}
-        </nuxt-link>
-        <button @click="next" :disabled="isLast" class="item-page">Next</button>
-    </div>
+    <Pagination v-show="this.posts" :linkName="linkName" :back="back" :next="next" :isFirst="isFirst" :isLast="isLast" :idx="idx" />
   </fragment>
 </template>
 
@@ -87,11 +75,12 @@ export default {
 
     const category = params.name.charAt(0).toUpperCase() + params.name.slice(1)
 
+    const needPosts = 12
     let idx = params.idx - 1
-    let startIdx = idx * 12
-    let endIdx = startIdx + 12
+    let startIdx = idx * needPosts
+    let endIdx = startIdx + needPosts
 
-    return { posts, startIdx, endIdx, category }
+    return { posts, startIdx, endIdx, category, needPosts }
   },
   methods: {
     back() {
@@ -103,7 +92,7 @@ export default {
   },
   computed: {
       idxPosts() {
-          const page = this.posts.length / 12
+          const page = this.posts.length / this.needPosts
           return Math.ceil(page)
       },
       isFirst() {
@@ -122,13 +111,14 @@ export default {
 <style lang="scss">
 .category-title {
   padding: .8rem 1rem;
-  margin-bottom: 1rem;
-  width: 100%;
+  margin: 0 1rem 1rem;
+  width: auto;
   border: 1px solid #fff;
-  border-radius: 5px;
+  border-radius: 3px;
   color: #fff;
   @media (min-width: 550px) {
     width: fit-content;
+    margin: 0 0 1rem;
   }
   &.news {
     background-color: rgb(15, 138, 253)

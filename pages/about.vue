@@ -11,7 +11,7 @@
       <div class="website-info">
         <h2>Website</h2>
         <p>
-          Develope by <a rel="author" target="_blank" href="https://www.linkedin.com/in/angga-asriyanto-web-dev">Angga Asriyanto</a>, Desember 2021 menggunakan Nuxt.js dan Firebase.
+          Design & Develope by <a rel="author" target="_blank" href="https://www.linkedin.com/in/angga-asriyanto-web-dev">Angga Asriyanto</a>, Desember 2021 menggunakan Nuxt.js dan Firebase.
         </p>
       </div>
     </div>

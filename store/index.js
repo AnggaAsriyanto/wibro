@@ -21,7 +21,7 @@ export const state = () => ({
     profilePhotoName: '',
     profileId: null,
     isBar: null,
-    isInfoUser: null,
+    isSearching: null,
 })
 
 export const getters = {
@@ -146,15 +146,15 @@ export const mutations = {
     toggleBar(state) {
         state.isBar = !state.isBar
     },
-    toggleInfoUser(state) {
-        state.isInfoUser = !state.isInfoUser
-    },
     resetBarInfoUser(state) {
         state.isBar = false
-        state.isInfoUser = false
+        state.isSearching = false
     },
     userAnonymous(state) {
         state.user = true
+    },
+    toggleSearch(state) {
+        state.isSearching = !state.isSearching
     }
 }
 

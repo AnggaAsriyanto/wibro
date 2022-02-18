@@ -14,8 +14,8 @@
         data-ad-client="ca-pub-1142153237520676"
         data-ad-slot="9728959860">
     </InFeedAdsense> -->
-    <div v-if="this.postsLists.length == 9 && !loading" class="more-posts">
-       <nuxt-link :to="{ name: 'posts-pages-idx', params: { idx: 1} }">
+    <div v-if="this.postsLists.length === 10" class="more-posts">
+       <nuxt-link :to="{ name: 'posts-pages-idx', params: { idx: '1'} }">
           <h5>Lihat lebih banyak <span><i class="fas fa-arrow-right"></i></span></h5>
        </nuxt-link>
     </div>

@@ -5,7 +5,7 @@
         </div>
         <div>
             <label for="email">Email</label>
-            <input @click="removeError" v-model="email" id="email" type="email" required>
+            <input @click="removeError" v-model="email" id="email" type="email" autofocus required>
         </div>
         <div class="pass-cont">
             <label for="password">Password</label>

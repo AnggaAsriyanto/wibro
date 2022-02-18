@@ -123,7 +123,8 @@ export default {
     Disallow: [
       '/admin',
       '/post-preview',
-      '/create-post'
+      '/create-post',
+      '/users-profile-username'
     ],
   },
 
@@ -138,7 +139,7 @@ export default {
     routes: [
       'posts/ousama-ranking-anime-dengan-grafik-sederhana-tapi-cerita-luar-biasa',
       'posts/9-anime-movie-terbaik-yang-wajib-kalian-tonton',
-      'posts/apa-yang-sebenarnya-dilakukan-lucoa-bersama-adiknya%3F'
+      'posts/apa-yang-sebenarnya-lucoa-lakukan-bersama-adiknya%3F'
     ],
     defaults: {
       changefreq: 'daily',
