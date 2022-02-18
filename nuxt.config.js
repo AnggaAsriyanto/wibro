@@ -134,7 +134,8 @@ export default {
     exclude: [
       '/admin',
       '/post-preview',
-      '/create-post'
+      '/create-post',
+      '/users-profile-username'
     ],
     routes: [
       'posts/ousama-ranking-anime-dengan-grafik-sederhana-tapi-cerita-luar-biasa',
