@@ -106,12 +106,39 @@ export default {
       }
     }], [
       '@nuxtjs/pwa', {
-        meta: false,
-        icon: false,
+        meta: {
+          title: 'Berita Anime Terbaru Indonesia',
+          author: 'Bang Wibro',
+          charset: true,
+          viewport: true,
+          mobileApp: true,
+          lang: 'id',
+        },
+        manifest: {
+          short_name: 'Wibro',
+          name: 'Wibro: Berita Anime Hari ini!',
+          lang: 'id',
+          start_url: '/',
+          background_color: '#ffffff',
+          theme_color: '#f0f0f0',
+          display: 'standalone',
+          useWebmanifestExtension: false,
+          icon: [
+            {
+              source: '/static/icon.png',
+              fileName: 'icon.png',
+              size: [64, 120, 144, 152, 192, 384, 512],
+              purpose: 'maskable',
+              chaceDir: true,
+            }
+          ],
+        },
         workbox: {
           importScripts: [
-            '/firebase-auth-sw.js'
+            '/firebase-auth-sw.js',
           ],
+          offline: true,
+          cacheAssets: true,
           dev: process.env.NODE_ENV === 'development',
         }
       }
@@ -168,5 +195,15 @@ export default {
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
+  build: {
+    collapseBooleanAttributes: true,
+    decodeEntities: true,
+    minifyCSS: true,
+    minifyJS: true,
+    processConditionalComments: true,
+    removeEmptyAttributes: true,
+    removeRedundantAttributes: true,
+    trimCustomFragments: true,
+    useShortDoctype: true
+  },
 }
