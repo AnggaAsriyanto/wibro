@@ -12,7 +12,7 @@
                     </div>
                     <div class="upload-file">
                         <label for="img-file" class="item">Upload Cover Image</label>
-                        <input id="img-file" ref="postImage" @change="fileChange" type="file" accept=".png, .jpg, .jpeg">
+                        <input id="img-file" ref="postImage" @change="fileChange" type="file" accept=".png, .jpg, .jpeg, .webp">
                         <button class="item preview" @click="openPreview" :disabled="!$store.state.postImageFileURL">Preview Image</button>
                     </div>
                     <div>

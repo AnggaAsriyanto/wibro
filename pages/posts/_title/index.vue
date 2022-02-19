@@ -114,10 +114,10 @@ export default {
     },
     mounted() {
         this.loading = false
-        window.addEventListener('scroll', this.handleScroll )
+        window.addEventListener('scroll', this.handleScroll)
     },
     beforeDestroy() {
-        window.removeEventListener('scroll', this.handleScroll )
+        window.removeEventListener('scroll', this.handleScroll)
     },
     methods: {
         async deletePost() {

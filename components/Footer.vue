@@ -61,9 +61,8 @@ footer {
 			align-items: flex-end;
 			img {
 				height: 100%;
-				width: auto;
+				width: fit-content;
 				object-fit: cover;
-				// margin-right: 0.1rem;
 			}
 			h1 {
 				margin-bottom: -0.8rem;

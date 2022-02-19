@@ -3,7 +3,7 @@
 		<nav>
 			<div class="nav-menu">
 				<div class="menu-bar">
-					<button @click="toggleBar" aria-label="toggle" type="button" class="toggle-bar">
+					<button @click="toggleBar" aria-label="open-bar" type="button" class="toggle-bar">
 						<span><i class="fas fa-bars"></i></span>
 					</button>
 				</div>
@@ -34,7 +34,7 @@
 					<div class="img-cont">
 						<img src="../static/wibro.svg" alt="wibro">
 					</div>
-					<button @click="toggleBar" class="toggle-bar">
+					<button @click="toggleBar" aria-label="close-bar" class="toggle-bar">
 						<span><i class="fas fa-times"></i></span>
 					</button>
 				</div>

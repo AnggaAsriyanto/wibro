@@ -3,10 +3,10 @@
       <div class="img-post">
           <div class="img-container">
               <nuxt-img v-if="post.postCoverImage" loading="lazy" format="webp" sizes="xl:100vw lg:100vw md:100vw sm:100vw xs:100vw" :src="post.postCoverImage" :alt="post.postCoverImageName"/>
-			  <ImageLoad v-else />
 			  <nuxt-link
 			  class="new-tab"
 			  target="_blank"
+			  aria-label="tab"
 			  :to="{ name: 'posts-title', params: { title: link } }"
 			  ><span><i class="fas fa-share"></i></span></nuxt-link>
           </div>
@@ -18,10 +18,10 @@
               </div>
 			  <nuxt-link
 			  :to="{ name: 'posts-title', params: { title: link } }"
-			  ><h1>{{ post.postTitle }}</h1></nuxt-link>
+			  ><h1>{{ title }}</h1></nuxt-link>
               <div class="detail-info">
                   <small><span><i class="fas fa-calendar-check"></i></span>{{ date }}</small>
-                  <small><span><i class="fas fa-clock"></i></span>{{ post.postTimeRead }} menit</small>
+                  <small><span><i class="fas fa-clock"></i></span>{{ timeRead }} menit</small>
               </div>
           </article>
       </div>
@@ -35,8 +35,14 @@ export default {
 		link() {
 			return this.post.postTitle.replace(/\s+/g, '-').replace(/,/g, '').toLowerCase()
 		},
+		title() {
+			return this.post.postTitle
+		},
 		date() {
 			return new Date(this.post.postDate).toLocaleString("id", { dateStyle: "long"})
+		},
+		timeRead() {
+			return this.post.postTimeRead
 		}
 	}
 }
