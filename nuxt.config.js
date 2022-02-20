@@ -107,7 +107,7 @@ export default {
     }], [
       '@nuxtjs/pwa', {
         meta: {
-          title: 'Berita Anime Terbaru Indonesia',
+          title: 'Berita Anime Terupdate Indonesia',
           author: 'Bang Wibro',
           charset: true,
           viewport: true,
@@ -116,7 +116,7 @@ export default {
         },
         manifest: {
           short_name: 'Wibro',
-          name: 'Wibro: Berita Anime Hari ini!',
+          name: 'Wibro: Berita Anime Terupdate di Indonesia',
           lang: 'id',
           start_url: '/',
           background_color: '#ffffff',

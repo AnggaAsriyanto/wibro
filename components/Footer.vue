@@ -2,7 +2,7 @@
     <footer ref="footer">
         <div class="brand">
             <figure class="img-cont">
-				<img src="../static/wibro-bb.svg" alt="wibro"> <h1>ibro</h1>
+				<img src="../static/wibro-full.svg" alt="wibro">
 			</figure>
             <p>Situs Blog Berita dan Info Anime terupdate di Indonesia, Wibro © Copyright 2022</p>
         </div>
@@ -56,13 +56,14 @@ footer {
 		}
 		.img-cont {
 			height: 4rem;
+			width: max-content;
 			margin-bottom: 1rem;
 			display: flex;
 			align-items: flex-end;
 			img {
 				height: 100%;
-				width: fit-content;
-				object-fit: cover;
+				width: 100%;
+				object-fit: contain;
 			}
 			h1 {
 				margin-bottom: -0.8rem;
