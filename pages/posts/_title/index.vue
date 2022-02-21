@@ -45,6 +45,19 @@
                 <ShareNetwork rel="nofollow" network="telegram" :url="url" :title="post[0].postTitle" aria-label="telegram" class="st-custom-button"><span><i class="fab fa-telegram"></i></span></ShareNetwork>
             </div>
         </div>
+        <div class="label-cont">
+            <div class="label">
+                <div>
+                    <span><i class="far fa-eye"></i></span>
+                    <small>{{ this.postViews }} dilihat</small>
+                </div>
+                <div class="like" @click="likePost">
+                    <span v-if="!like"><i class="far fa-heart"></i></span>
+                    <span class="liked" v-else><i class="fas fa-heart"></i></span>
+                    <small>{{ this.postLikes }} suka</small>
+                </div>
+            </div>
+        </div>
         <div v-if="$store.state.isAdmin" class="admin-opt">
             <div class="admin-btn">
                 <nuxt-link :to="{ name: 'edit-post-id-title', params: { id: post[0].postId, title: post[0].postTitle.replace(/\s+/g, '-').toLowerCase() }}" aria-label="edit" class="post-tools edit"><span><i class="fas fa-pen"></i></span> Edit Post</nuxt-link>
@@ -81,6 +94,7 @@ export default {
             show: null,
             footerNum: null,
             loading: true,
+            like: null,
         }
     },
     async asyncData({ params, store, error, redirect }) {
@@ -112,11 +126,13 @@ export default {
     created() {
         this.url = `https://wibro.site${this.$route.path}`
     },
-    mounted() {
-        this.loading = false
+    async mounted() {
         window.addEventListener('scroll', this.handleScroll)
+        this.$store.dispatch("addViews", this.post[0].postId)
+        this.$store.dispatch("getLikes", this.post[0].postId)
+        this.loading = false
     },
-    beforeDestroy() {
+    async beforeDestroy() {
         window.removeEventListener('scroll', this.handleScroll)
     },
     methods: {
@@ -127,6 +143,14 @@ export default {
                 window.location.reload()
             }, 500);
             this.$nuxt.refresh()
+        },
+        async likePost() {
+            this.like = !this.like
+            if(this.like) {
+                await this.$store.dispatch("addLikes", this.post[0].postId)
+            } else {
+                await this.$store.dispatch("subtractLikes", this.post[0].postId)
+            }
         },
         deleteConf() {
             this.isConf = true
@@ -146,6 +170,12 @@ export default {
         }
     },
     computed: {
+        postLikes() {
+            return this.$store.state.postLikes
+        },
+        postViews() {
+            return this.$store.state.postViews
+        },
         postTags() {
             const tags = this.post[0].postTags
             return tags.split(',')

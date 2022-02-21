@@ -15,7 +15,7 @@
       </div>
       <Pagination v-show="this.posts.length > 0" :linkName="linkName" :back="back" :next="next" :isFirst="isFirst" :isLast="isLast" :idx="idx" />
     </div>
-    <div class="no-result">
+    <div v-else class="no-result">
       <h3>Maaf, data untuk <span>"{{this.$route.params.value}}"</span> tidak tersedia</h3>
     </div>
   </fragment>
@@ -38,7 +38,7 @@ export default {
   },
   async asyncData({store, params, error}) {
     const posts = await store.state.posts.filter((post) => {
-      return post.postTitle.toLowerCase().includes(params.value) || post.postTags.includes(params.value)
+      return post.postTitle.toLowerCase().includes(params.value.toLowerCase()) || post.postTags.includes(params.value.toLowerCase())
     })
 
     const needPosts = 9

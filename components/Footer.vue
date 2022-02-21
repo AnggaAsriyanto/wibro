@@ -56,7 +56,7 @@ footer {
 		}
 		.img-cont {
 			height: 4rem;
-			width: max-content;
+			width: 7rem;
 			margin-bottom: 1rem;
 			display: flex;
 			align-items: flex-end;

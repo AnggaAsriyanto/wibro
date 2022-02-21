@@ -10,6 +10,8 @@ export const state = () => ({
     postTags: '',
     postTimeRead: 1,
     postMetaDesc: '',
+    postLikes: 0,
+    postViews: 0,
     editPost: null,
     inPreview: null,
     user: null,
@@ -155,6 +157,12 @@ export const mutations = {
     },
     toggleSearch(state) {
         state.isSearching = !state.isSearching
+    },
+    updateViews(state, payload) {
+        state.postViews = payload
+    },
+    updateLikes(state, payload) {
+        state.postLikes = payload
     }
 }
 
@@ -186,13 +194,53 @@ export const actions = {
                     postTimeRead: doc.data().postTimeRead,
                     postMetaDesc: doc.data().postMetaDesc,
                     postHTML: doc.data().postHTML,
-                    postDate: doc.data().date
+                    postDate: doc.data().date,
+                    postLike: doc.data().postLike,
+                    postSeen: doc.data().postSeen
                 }
                 commit("addPost", data)
             }
         });
         commit("unload")
         console.log("✅ Get Data")
+    },
+    async addViews({commit}, payload) {
+        const views = await this.$fire.firestore.collection("posts").doc(payload)
+        const getView = await views.get()
+        const sumViews = getView.data().postViews + 1
+        await views.update({
+            postViews: sumViews
+        })
+
+        commit("updateViews", sumViews)
+    },
+    async getLikes({commit}, payload) {
+        const likes = await this.$fire.firestore.collection("posts").doc(payload).get()
+        const totalLikes = likes.data().postLikes
+
+        commit("updateLikes", totalLikes)
+    },
+    async addLikes({commit}, payload) {
+        const likes = await this.$fire.firestore.collection("posts").doc(payload)
+        const getLike = await likes.get()
+        const totalLikes = getLike.data().postLikes + 1
+
+        commit("updateLikes", totalLikes)
+
+        await likes.update({
+            postLikes: totalLikes
+        })
+    },
+    async subtractLikes({commit}, payload) {
+        const likes = await this.$fire.firestore.collection("posts").doc(payload)
+        const getLike = await likes.get()
+        const totalLikes = getLike.data().postLikes - 1
+
+        commit("updateLikes", totalLikes)
+
+        await likes.update({
+            postLikes: totalLikes
+        })
     },
     async updatePost({commit, dispatch}, payload) {
         commit("filterPost", payload)
