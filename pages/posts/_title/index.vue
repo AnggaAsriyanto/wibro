@@ -45,7 +45,7 @@
                 <ShareNetwork rel="nofollow" network="telegram" :url="url" :title="post[0].postTitle" aria-label="telegram" class="st-custom-button"><span><i class="fab fa-telegram"></i></span></ShareNetwork>
             </div>
         </div>
-        <div class="label-cont">
+        <div v-if="this.$store.state.postViews" class="label-cont">
             <div class="label">
                 <div>
                     <span><i class="far fa-eye"></i></span>
