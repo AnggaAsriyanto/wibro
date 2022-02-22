@@ -45,16 +45,16 @@
                 <ShareNetwork rel="nofollow" network="telegram" :url="url" :title="post[0].postTitle" aria-label="telegram" class="st-custom-button"><span><i class="fab fa-telegram"></i></span></ShareNetwork>
             </div>
         </div>
-        <div v-if="postViews > 0" class="label-cont">
+        <div class="label-cont">
             <div class="label">
                 <div>
                     <span><i class="far fa-eye"></i></span>
-                    <small>{{ postViews }} dilihat</small>
+                    <small>{{this.$store.state.postViews }} dilihat</small>
                 </div>
                 <div class="like" @click="likePost">
                     <span v-if="!like"><i class="far fa-heart"></i></span>
                     <span class="liked" v-else><i class="fas fa-heart"></i></span>
-                    <small>{{ postLikes }} suka</small>
+                    <small>{{ this.$store.state.postLikes }} suka</small>
                 </div>
             </div>
         </div>
@@ -170,12 +170,6 @@ export default {
         }
     },
     computed: {
-        postLikes() {
-            return this.$store.state.postLikes
-        },
-        postViews() {
-            return this.$store.state.postViews
-        },
         postTags() {
             const tags = this.post[0].postTags
             return tags.split(',')
