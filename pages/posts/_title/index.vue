@@ -45,16 +45,16 @@
                 <ShareNetwork rel="nofollow" network="telegram" :url="url" :title="post[0].postTitle" aria-label="telegram" class="st-custom-button"><span><i class="fab fa-telegram"></i></span></ShareNetwork>
             </div>
         </div>
-        <div class="label-cont">
+        <div v-if="postViews > 0" class="label-cont">
             <div class="label">
                 <div>
                     <span><i class="far fa-eye"></i></span>
-                    <small>{{ this.postViews }} dilihat</small>
+                    <small>{{ postViews }} dilihat</small>
                 </div>
                 <div class="like" @click="likePost">
                     <span v-if="!like"><i class="far fa-heart"></i></span>
                     <span class="liked" v-else><i class="fas fa-heart"></i></span>
-                    <small>{{ this.postLikes }} suka</small>
+                    <small>{{ postLikes }} suka</small>
                 </div>
             </div>
         </div>
@@ -128,8 +128,8 @@ export default {
     },
     async mounted() {
         window.addEventListener('scroll', this.handleScroll)
-        this.$store.dispatch("addViews", this.post[0].postId)
-        this.$store.dispatch("getLikes", this.post[0].postId)
+        await this.$store.dispatch("addViews", this.post[0].postId)
+        await this.$store.dispatch("getLikes", this.post[0].postId)
         this.loading = false
     },
     async beforeDestroy() {
