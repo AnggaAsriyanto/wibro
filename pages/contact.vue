@@ -5,8 +5,8 @@
       <p>Punya beberapa pertanyaan kritik atau saran, Hubungi kami via berikut</p>
       <div class="contact-info">
         <div class="mail">
-          <a href="mailto:wibroidn@gmail.com" aria-label="email"><span><i class="fas fa-envelope"></i></span></a>
-          <p>wibroidn@gmail.com</p>
+          <a href="mailto:contactwibro@gmail.com" aria-label="email"><span><i class="fas fa-envelope"></i></span></a>
+          <p>contactwibro@gmail.com</p>
         </div>  
         <div class="social-media">
           <a href="https://discord.gg/Uyr8Ms4auS" target="_blank" rel="noreferrer" aria-label="discord-msg"><span><i class="fab fa-discord"></i></span></a>

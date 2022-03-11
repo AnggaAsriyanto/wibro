@@ -82,7 +82,7 @@ export default {
                 { property: "og:image", content: this.post[0].postCoverImage },
             ],
             link: [
-                { rel: "canonical", href: this.url }
+                { rel: "canonical", href: `https://wibro.site${this.$route.path}` }
             ]
         }
     },
