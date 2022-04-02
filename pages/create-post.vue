@@ -81,6 +81,7 @@ export default {
     },
 	methods: {
 		fileChange(e) {
+			// tracking cover image post and create blob url
 			this.error = null
 			this.file = e.target.files[0]
 			const filename = this.file.name
@@ -91,6 +92,7 @@ export default {
 			this.$store.commit('openImagePreview')
 		},
 		imageHandler(file, Editor, cursorLocation, resetUploader) {
+			// add and upload image body into firebase storage
 			const storageRef = this.$fire.storage.ref()
 			const docRef = storageRef.child(`documents/postImages/${file.name}`)
 			docRef.put(file).on(
@@ -109,8 +111,11 @@ export default {
 			)
 		},
 		uploadPost() {
+			// check if post have title and paragraph body before post uploaded
 			if(this.postTitle.length !== 0 && this.postHTML.length !== 0) {
+				// check if post have cover image post
 				if(this.file) {
+					// process post cover image
 					this.$store.commit('load')
 					const storageRef = this.$fire.storage.ref()
 					const docRef = storageRef.child(`documents/postCoverImages/${this.$store.state.postImageName}`)

@@ -19,6 +19,7 @@ export default {
     }
   },
   mounted() {
+    // hide sidebar on mobile frame
     if(window.innerWidth >= 1000) {
       this.desktop = true
       return

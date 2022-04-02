@@ -105,6 +105,7 @@ export default {
         },
 
 		hasCategory(category) {
+			// hide category page if doesn't exist yet
 			const posts = this.$store.state.posts.some((post) => post.postCategory === category)
 			return posts;
 		},
@@ -116,6 +117,7 @@ export default {
 		isSearching() {
 			this.searchValue = ''
 			this.$store.commit("toggleSearch")
+			// to auto-focus on search bar after click icon search - UX improvement
 			if(this.$store.state.isSearching) {
 				setTimeout(() => {
 					this.$refs.search.focus()
@@ -124,6 +126,7 @@ export default {
 		},
 
 		handleSubmit() {
+			// blur input search after sent input - UX improvement
 			this.$refs.search.blur()
 			this.$router.push({ name: 'posts-search-value-idx', params: { value: this.searchValue, idx: '1'}})
 		},

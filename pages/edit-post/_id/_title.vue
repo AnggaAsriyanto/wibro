@@ -78,6 +78,7 @@ export default {
         }
     },
 	async created() {
+		// find post with id
 		this.routeId = this.$route.params.id
 		this.currentPost = await this.$store.state.posts.filter((post) => {
 			return post.postId === this.routeId

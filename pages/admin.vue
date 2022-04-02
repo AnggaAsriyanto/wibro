@@ -32,9 +32,12 @@ export default {
     },
     methods: {
         async handleAdmin() {
+            // get code on database
             const res = await this.$fire.firestore.collection("admin").doc(this.adminCode)
             const resResults = await res.get()
+            // check the code is match
             if(resResults.data()) {
+                // check if the code not has been used
                 if(!resResults.data().user) {
                     const user = await this.$fire.firestore.collection("users").doc(this.$store.state.profileId)
                     await user.update({

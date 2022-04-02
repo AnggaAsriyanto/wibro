@@ -100,11 +100,13 @@ export default {
     async asyncData({ params, store, error, redirect }) {
         const paramsTitle = params.title.replace(/-/g, ' ')
 
+        // search the most related title on posts state database
         const post = await store.state.posts.filter((post) => {
             let postTitle = post.postTitle.replace(/,/g, '').toLowerCase()
             return postTitle.includes(paramsTitle)
         })
 
+        // if no post found
         if(post.length === 0) {
             await error({
                 statusCode: 404
@@ -113,8 +115,10 @@ export default {
             return;
         }
 
+        // if params title doesn't match exactly with the title post founded then it will redirect again
+        // until the title post and params title exactly same, like params title "go-japa" but in database
+        // it should "go-japan" so it will trigger this
         const titleDash = post[0].postTitle.replace(/,/g, '').replace(/\s+/g, '-').toLowerCase()
-  
         if(params.title !== titleDash) {
             await redirect({ name: 'posts-title', params: { title: titleDash}})
 
@@ -137,6 +141,7 @@ export default {
     },
     methods: {
         async deletePost() {
+            // remove post button just for admin
             this.$store.dispatch("deletePost", this.post[0].postId)
             await this.$router.push('/')
             setTimeout(() => {

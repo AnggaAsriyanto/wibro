@@ -60,6 +60,7 @@ export default {
       }
     });
 
+    // total index based on post has found
     const pageidx = Math.ceil(posts.length / 12)
 
     if(
@@ -73,8 +74,10 @@ export default {
         })
     }
 
+    // change the first letter into uppercase
     const category = params.name.charAt(0).toUpperCase() + params.name.slice(1)
 
+    // limit post in one page category
     const needPosts = 12
     let idx = params.idx - 1
     let startIdx = idx * needPosts
@@ -96,9 +99,11 @@ export default {
           return Math.ceil(page)
       },
       isFirst() {
+          // true if user is in page number one
           return this.$route.params.idx == 1
       },
       isLast() {
+          // tru if user is on the last page
           return this.$route.params.idx == this.idxPosts
       },
       idx() {

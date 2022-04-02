@@ -33,6 +33,7 @@
 export default {
     layout: 'cwn',
     middleware({ redirect, store, params}) {
+        // check if user is valid to go on dashboard
         if(!store.state.profileUsername || params.username !== store.state.profileUsername) {
             return redirect('/')
         }

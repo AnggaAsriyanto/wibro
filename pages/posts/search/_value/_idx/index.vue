@@ -37,10 +37,12 @@ export default {
     }
   },
   async asyncData({store, params, error}) {
+    // search on database based query has given
     const posts = await store.state.posts.filter((post) => {
       return post.postTitle.toLowerCase().includes(params.value.toLowerCase()) || post.postTags.includes(params.value.toLowerCase())
     })
 
+    // add limit in one page
     const needPosts = 9
     let idx = params.idx - 1
     let startIdx = idx * needPosts
@@ -48,6 +50,7 @@ export default {
 
     const pageidx = Math.ceil(posts.length / needPosts)
 
+    // limit person to not go more far or more less than it shouldn't
     if(params.idx > pageidx && pageidx != 0) {
       error ({
         statusCode: 404

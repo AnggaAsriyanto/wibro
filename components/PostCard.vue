@@ -33,6 +33,7 @@ export default {
 	props: ['post'],
 	computed: {
 		link() {
+			// edit title post page, change space into dash -, remove comma, and make it lower case
 			return this.post.postTitle.replace(/\s+/g, '-').replace(/,/g, '').toLowerCase()
 		},
 		title() {

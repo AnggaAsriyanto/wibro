@@ -40,6 +40,7 @@ export default {
     }
   },
   async asyncData({store}) {
+    // get lists of posts in getters vuex database
     const postsLists = await store.getters.postsFeeds
 
     return { postsLists }

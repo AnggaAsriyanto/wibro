@@ -74,6 +74,7 @@ export default {
     },
     methods: {
         togglePass() {
+            // show and hide password
             this.clicked = !this.clicked
 
             if(this.passType === 'password') {
@@ -91,6 +92,7 @@ export default {
                 this.password !== ''
             ) {
                 const username = await this.$fire.firestore.collection("users").where("username", "==", this.username).get()
+                // check if username not has been used
                 if(username.empty) {
                     this.$store.commit('load')
                     this.error = false
